@@ -1,0 +1,170 @@
+%% The following is a directive for TeXShop to indicate the main file
+%%!TEX root = diss.tex
+
+\chapter{Related Work}
+\label{ch:RelatedWork}
+
+\begin{epigraph}
+    \emph{
+       The computing scientist’s main challenge is not to get confused by the 
+       complexities of his own making.
+     } ---~Edsger W. Dijkstra
+\end{epigraph}
+
+\noindent Researchers have investigated both the questions that developers ask 
+as they understand and evolve their systems, as well as the efficacy of tools 
+that support developers in answering their questions during software change 
+tasks.
+
+\par Developers find it challenging to understand code in modern codebases for
+a number of reasons.
+Many codebases today are large and complex, with some meeting the definition of 
+an \emph{ultra-large-scale system} \cite{feiler-2006-ulss}.
+
+\par Google reported in 2016 that its monolithic software codebase was composed
+of approximately 1 billion files, with a history of 35 million commits in a
+repository that contains 85 terabytes of data and 2 billion lines of code
+\cite{potvin-2016-google}.
+Of course, not all software systems in existence today are quite comparable in 
+scale, but it serves to contextualize the challenges that developers may face in
+understanding the systems they wrangle each day.
+The size, complexity, and indirection that is becoming commonplace in systems
+today \cite{latoza-2010-reach} are pushing the already-elusive goal of
+enabling developers to more easily enderstand their code into new and 
+uncharted territories.
+
+\section{Questions that Developers Ask}
+\label{sec:QuestionsThatDeveloperAsk}
+
+\noindent Developers have a large number of information needs that must be
+addressed during their day-to-day workflows.
+These information needs often present themselves as a variety of questions
+that require the integration of often-disparate sources of information
+\cite{fritz-2010-info-frag}.
+For example, to understand how a defect was introduced, a developer may have to
+read the source code of a program, find additional context within a bug report
+or a project tracker, or (in the worst case) resort to speaking to other 
+developers who may have more information. 
+
+\par Other questions that developers may ask are more focused, and may involve
+querying only one source of information, such as a single program or a
+collection of modules in a system.
+As developers work to evolve and understand specific parts of their systems,
+they may ask themselves: ``where are instances of this class created?" or
+``what data can we access from this object?" as they try to discover entities
+and relationships that capture incoming connections to a given entity
+\cite{sillito-2006-questions-during-task}.
+Additional questions that developers may ask may be related to 
+the control-flow or the data-flow through a program, such as 
+``why isn't control reaching this point in code?" and 
+``what parts of this data structure are being accessed in this code?" 
+\cite{sillito-2006-questions-during-task}.
+These are questions that commonly arise as developers perform change tasks
+on their code.
+
+\par Researchers have conducted studies that investigate both the 
+frequency and difficulty of these focused questions that developers ask during 
+change tasks.
+LaToza et al. found that a significant portion of a developer's work involves 
+answering \emph{reachability questions}, which are defined as a search across 
+feasible paths through a program for target statements matching search criteria 
+\cite{latoza-2010-reach}.
+In a survey distributed to 2000 developers employed at Microsoft's Redmond
+campus, 460 developers reported asking questions that could be phrased as 
+reachability questions more than 9 times a day.
+Of the developers who responded, 82\% of them rated one or more of the
+reachability questions as at least somewhat hard to answer.
+\cite{latoza-2010-reach}.
+Not only are reachability questions difficult to answer, but they are also
+time-consuming.
+A field study of 17 developers found that of the 10 longest activities
+undertaken by devevlopers, 9 were associated with reachability questions
+\cite{latoza-2010-reach}.
+
+% TODO: does feel a little weird to end here; should tie it up, somehow.
+
+\section{Tools that Support Developer Questions}
+\label{sec:ToolsSupportDeveloperQuestions}
+
+\noindent Different approaches have been taken to building tools 
+that enable developers to answer questions about their code.
+Some tools such as \emph{Whyline} present a more passive approach,
+presenting developers with a subset of pre-defined questions and answers 
+they may choose to investigate after runtime \cite{ko-2004-whyline}.
+Other tools present a more active approach; \emph{GetMeHere} developed
+at Microsoft Research enables developers to form their own queries about
+the behaviour of their programs, and provides answers to them without needing
+an explicit execution trace \cite{barnett-2014-get}.
+
+\par The Whyline was initially developed as an interogative debugging interface
+for the Alice programming language, and later augmented to support the Java
+programming language and the needs of professional developers.
+At a high-level, Whyline enaables developers to select questions about a
+program's output, and it then helps developers to work backfrom from output
+to its causes \cite{ko-2009-java-whyline}.
+These questions about program output are phrased as ``why did" and ``why didn't"
+queries about the values in a program. 
+For example, consider a case when a variable \texttt{foo} is being erroneously 
+set to some value \textit{x}.
+A developer could choose to investigate the cause of this erroneous program
+behaviour by running the program, opening the Whyline window and selecting
+``why did \texttt{foo} $=$ \textit{x}?" and a \emph{temporal context}, which is 
+ a specified time-frame that they wish to investigate.
+The Whyline then presents a view of all statments of the program within the
+temporal context that contributed to the line where \texttt{foo} has the value
+\textit{x}. 
+Whyline's approach of presenting a pre-defined subset of questions about the 
+output of programs has benfits, as it avoid speculation about the causes of
+a failure, and simplifies the exploration of code responsible for the output
+\cite{ko-2009-java-whyline}.
+An experiment was conducted to evaluate the efficacy of Whyline on isolating the
+causes of two bug reports from an open source projects.
+It was found that Whyline users were successful about three times as often
+and about twice as fast compared to the control group who used conventional
+debugging tools and techniques.
+
+\par Other tools encourage the developer to take a more active approach in
+formulating questions about programs and their behaviour.
+Similar to Whyline, GetMeHere enables developers to select a line of code as a
+point of interest and visualize the execution that reaches the given point.
+Where it differs, however, is in how it is able to generate this execution
+by using an SMT-based static analysis \cite{barnett-2014-get} without having to
+execute the code.
+GetMeHere is also presented as a general query engine, where developers can
+specify a slice in a program, and execute queries that represent reachability
+questions over the given slice \cite{barnett-2014-get}.
+The flexibility afforded by GetMeHere enables to developers to fine-tune their
+queries, but may introduce some of the speculation about program failures or
+erroneous behaviour that Whyline attempts to minimize.
+
+% TODO: talk a bit about performance?
+% Wasn't tested on a production system
+% Calculator: 650 lines of C#
+% Tetris: 3000 lines of C#
+% Tailspin Toys: 11k lines of C#
+
+\section{How Developers Use Tools to Understand Programs}
+\label{sec:HowDevelopersUseToolsToUnderstandPrograms}
+
+\noindent In practice, developers still face difficulties in finding answers 
+for the questions they asking during development tasks, even with the tooling 
+available to them.
+This appears to be in part due to the inevitability of imperfect mappings from
+high-level developer questions to the low-level analysis facilities afforded
+by prograam comprehension tools.
+In fact, a study of industrial programmers [sic] by Sillito et al. showed that 
+participants often struggled to refine their questions, and map them to tools
+that could be used to answer them \cite{sillito-2006-questions-during-task}.
+
+\par The usability of software engineering tools may also be a significant
+factor on how developers use tools to help answer their questions.
+Many software tool developers rely on their own intuition for how a tool should
+work, eschewing established criteria and procedures for evaluating their 
+usability \cite{toleman-98-soft-tools}.
+Consequently, the tools available to developers today may be useful, but
+ultimately be lacking in terms of their usability.
+This is especially problematic, as modern systems grow more complex and even
+more challenging to navigate without purpose-built tooling.
+
+\endinput
+
