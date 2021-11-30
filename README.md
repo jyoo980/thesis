@@ -1,5 +1,8 @@
 # `ubcdiss` &ndash; a dissertation template for LaTeX
 
+**Note:** this repo is gratefully adapted from Brian de Alwis'
+[ubcdiss](https://github.com/briandealwis/ubcdiss) template.
+
 This distribution provides a community-maintained LaTeX template
 for writing a dissertation that conforms with UBC Graduate and Postdoctoral Studies (GPS) specifications. 
 
