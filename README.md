@@ -1,4 +1,4 @@
-# `ubcdiss` &ndash; a dissertation template for LaTeX
+# `ubcdiss` &ndash; a dissertation template for LaTeX [![ubcdiss CI](https://github.com/jyoo980/thesis/actions/workflows/latex.yml/badge.svg?branch=master)](https://github.com/jyoo980/thesis/actions/workflows/latex.yml)
 
 **Note:** this repo is gratefully adapted from Brian de Alwis'
 [ubcdiss](https://github.com/briandealwis/ubcdiss) template.
