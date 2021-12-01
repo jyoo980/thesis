@@ -136,6 +136,10 @@ questions over the given slice \cite{barnett-2014-get}.
 The flexibility afforded by GetMeHere enables to developers to fine-tune their
 queries, but may introduce some of the speculation about program failures or
 erroneous behaviour that Whyline attempts to minimize.
+GetMeHere was evaluated on three benchmark programs, all written in C\myhash.
+The sizes of the benchmark programs ranged from 650 to $11,000$ lines of code;
+% I know this is true, but I probably need to cite this
+which is relatively small by modern standards.
 
 % TODO: talk a bit about performance?
 % Wasn't tested on a production system
@@ -177,8 +181,23 @@ However. none were observed making use of the IDE's built-in program
 comprehension features, such as visualization and concept localization
 \cite{roehm-2012-comprehend-software}.
 
+\par Developers spend a significant portion of the day attempting to answer
+questions about their code.
+Although there are specialized tools that exist to aid developers in this task,
+they are not without their limitations. 
+Whyline represents a promising approach in enabling developers to answer 
+questions about the runtime behaviour of their code.
+However, it only enables a retrospective analysis of a program, and does not 
+support on-the-fly queries.
+GetMeHere attempts to bypass the need for an execution trace and provide support
+for on-demand queries by translating high-level developer questions into SMT
+instances. 
+Although the results presented by Barnett et al. is promising, the
+relatively small size of the systems GetMeHere was evaluated on leaves more to
+be investigated about the scalability of their approach.
+
 \endinput
 
-End the section (How Developers Use Tools...) with an explanation of why there
-appears to be a disconnect 
+TODO: add a paragraph about what my thesis attempts to contribute (in relation
+to the related work section).
 
