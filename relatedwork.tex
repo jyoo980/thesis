@@ -54,7 +54,7 @@ they may ask themselves: ``where are instances of this class created?" or
 ``what data can we access from this object?" as they try to discover entities
 and relationships that capture incoming connections to a given entity
 \cite{sillito-2006-questions-during-task}.
-Additional questions that developers may ask may be related to 
+Additional questions that developers may ask are related to 
 the control-flow or the data-flow through a program, such as 
 ``why isn't control reaching this point in code?" and 
 ``what parts of this data structure are being accessed in this code?" 
@@ -63,7 +63,7 @@ These are questions that commonly arise as developers perform change tasks
 on their code.
 
 \par Researchers have conducted studies that investigate both the 
-frequency and difficulty of these focused questions that developers ask during 
+frequency and difficulty of focused questions that developers ask during 
 change tasks.
 LaToza et al. found that a significant portion of a developer's work involves 
 answering \emph{reachability questions}, which are defined as a search across 
@@ -99,11 +99,11 @@ an explicit execution trace \cite{barnett-2014-get}.
 \par The Whyline was initially developed as an interogative debugging interface
 for the Alice programming language, and later augmented to support the Java
 programming language and the needs of professional developers.
-At a high-level, Whyline enaables developers to select questions about a
-program's output, and it then helps developers to work backfrom from output
+At a high-level, Whyline enables developers to select questions about a
+program's output, and it then helps developers to work back from from output
 to its causes \cite{ko-2009-java-whyline}.
-These questions about program output are phrased as ``why did" and ``why didn't"
-queries about the values in a program. 
+These questions are phrased as ``why did" and ``why didn't"
+queries about program output.
 For example, consider a case when a variable \texttt{foo} is being erroneously 
 set to some value \textit{x}.
 A developer could choose to investigate the cause of this erroneous program
@@ -114,11 +114,11 @@ The Whyline then presents a view of all statments of the program within the
 temporal context that contributed to the line where \texttt{foo} has the value
 \textit{x}. 
 Whyline's approach of presenting a pre-defined subset of questions about the 
-output of programs has benfits, as it avoid speculation about the causes of
+output of programs has benfits, as it avoids speculation about the causes of
 a failure, and simplifies the exploration of code responsible for the output
 \cite{ko-2009-java-whyline}.
 An experiment was conducted to evaluate the efficacy of Whyline on isolating the
-causes of two bug reports from an open source projects.
+causes of two bug reports from an open source project.
 It was found that Whyline users were successful about three times as often
 and about twice as fast compared to the control group who used conventional
 debugging tools and techniques.
@@ -136,7 +136,7 @@ questions over the given slice \cite{barnett-2014-get}.
 The flexibility afforded by GetMeHere enables to developers to fine-tune their
 queries, but may introduce some of the speculation about program failures or
 erroneous behaviour that Whyline attempts to minimize.
-GetMeHere was evaluated on three benchmark programs, all written in C\myhash.
+GetMeHere was evaluated on three benchmark programs, all written in C\#.
 The sizes of the benchmark programs ranged from 650 to $11,000$ lines of code;
 % I know this is true, but I probably need to cite this
 which is relatively small by modern standards.
