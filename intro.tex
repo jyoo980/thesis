@@ -57,14 +57,35 @@ This process of searching through the feasible paths and control-flow of a
 program for a set of target statements matching some search criteria can be
 formalized as the answering of \emph{reachability questions}
 \cite{latoza-2010-reach}.
-To provide a specific example, a developer may ask ``where did some argument
-\texttt{a} for a method \texttt{m} come from?"
+For example, a developer may ask ``where did some argument \texttt{a} for a 
+method \texttt{m} come from?"
 This question could be translated to a reachability question that queries the
 program for the set of feasible control-flow paths that terminate at the
 method \texttt{m}, filtering for statements that include dependencies for
 the argument \texttt{a}.
 
+\par Researchers have investigated tools that help developers answer reachability
+questions.
+tools such as the \emph{Whyline} can help developers reason about
+reachability questions by enabling developers to conduct retrospective
+debugging sessions of their programs \cite{ko-2004-whyline}.
+However, Whyline requires a retrospective program execution trace to generate 
+the information needed for a retrospective debugging session. It also limits 
+developers to a preset collection of questions-and-answers that they are able to
+query.
+\emph{GetMeHere} by Microsoft Research attempts to help developers answer
+reachability questions by translating them into verification problems that
+are dispatched to an \ac{SMT} solver \cite{barnett-2014-get}.
+GetMeHere also enables developers to form reachability questions that are more
+general in scope, mitigating the limitations associated with constraining
+the set of possible reachability questions.
+Although the performance of GetMeHere on smaller benchmark programs (e.g.,
+650 - $11,000$ LOC) is promising, it has yet to be evaluated on programs that 
+are more representative of production software systems today.
+
+% TODO: start on the "in this thesis" section.
 % TODO: push this sentence toward the end.
+
 For how far tools have evolved to aid developers in the act of \emph{writing}
 code, making the act of \emph{understanding} code easier for developers
 appears to be far more challenging.
