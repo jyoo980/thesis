@@ -26,19 +26,45 @@ Today, tools are able to present an incredible amount of information, and these
 are only a few in the arsenal of the modern software developer.
 
 \par However, developers engage in a wide variety of tasks;
-writing code is only part of their diverse workflows.
+writing code is only part of their diverse workflows 
+\cite{meyer-2017-work-life}.
 Developers also analyze requirements and problems, and map out broad flows of
 code that may be used to solve a problem.
 They also spend a large amount of time attempting to understand code.
 This may include activities such as reasoning about the inputs and outputs of
 a method, sketching out what the call stack looks like, and even asking 
 \emph{why} the code is doing what it is doing \cite{latoza-2006-mental-models}.
+A study by Ko et al. found that developers spent approximately 22\% of their
+time reading code, while a further 16\% was spent on navigating dependencies.
+\cite{ko-2005-eliciting-design}.
+This equates to developers spending approximately 38\% of their time on
+program comprehension tasks, in comparison to spending approximimately 20\% of
+their time on editing code \cite{ko-2005-eliciting-design}.
 
 \par The questions that developers may ask themselves as they attempt to 
 understand and modify code are often difficult to answer. 
 The difficulty of these questions even appear to be orthogonal to how much
 professional experience a developer has, or their familiarity with a codebase
 \cite{latoza-2010-reach}.
+Questions that developers frequently report as being challenging to answer are
+often related to the intent and implementation of code, or associated with 
+debugging tasks \cite{latoza-2010-hard-questions}.
+To effectively debug their systems and accurately reason about the
+intent and implementation of their code, developers often have to trace through
+through vast swathes of control-flow paths and filter for task-relevant 
+information.
+This process of searching through the feasible paths and control-flow of a
+program for a set of target statements matching some search criteria can be
+formalized as the answering of \emph{reachability questions}
+\cite{latoza-2010-reach}.
+To provide a specific example, a developer may ask ``where did some argument
+\texttt{a} for a method \texttt{m} come from?"
+This question could be translated to a reachability question that queries the
+program for the set of feasible control-flow paths that terminate at the
+method \texttt{m}, filtering for statements that include dependencies for
+the argument \texttt{a}.
+
+% TODO: push this sentence toward the end.
 For how far tools have evolved to aid developers in the act of \emph{writing}
 code, making the act of \emph{understanding} code easier for developers
 appears to be far more challenging.
