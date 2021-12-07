@@ -1,6 +1,14 @@
 %% The following is a directive for TeXShop to indicate the main file
 %%!TEX root = diss.tex
 
+% TODO: update this as required (until the cutoff date).
+\newcommand{\numparticipants}{57}
+% TODO: please remember to update this before I submit to GPS.
+\newcommand{\toolname}{ReachMaster 420}
+\newcommand{\userstudynum}{69}
+\newcommand{\fasterpct}{64}
+\newcommand{\usefulpct}{70}
+
 \chapter{Introduction}
 \label{ch:Introduction}
 
@@ -15,10 +23,10 @@
 There are a plethora of tools that have evolved over the years with the singular
 goal of making it easier for developers to write code.
 Code-completion tools building on context-dependent analysis 
-\cite{reps-1983-context} enable developers to quickly write code in systems they
+\cite{reps-1983-context} enable developers to quickly work in systems they
 may not even be familiar with.
 Many modern \acp{IDE} are capable of generating
-a large amount of boilerplate code at the click of a button.
+a large amount of boilerplate code at the click of a mouse.
 Recent work in large language models and deep learning \cite{chen-2021-copilot}
 has given rise to tools that developers can use to generate entire method 
 implementations.
@@ -50,7 +58,7 @@ Questions that developers frequently report as being challenging to answer are
 often related to the intent and implementation of code, or associated with 
 debugging tasks \cite{latoza-2010-hard-questions}.
 To effectively debug their systems and accurately reason about the
-intent and implementation of their code, developers often have to trace through
+intent and implementation of their code, developers must trace through
 through vast swathes of control-flow paths and filter for task-relevant 
 information.
 This process of searching through the feasible paths and control-flow of a
@@ -64,18 +72,18 @@ program for the set of feasible control-flow paths that terminate at the
 method \texttt{m}, filtering for statements that include dependencies for
 the argument \texttt{a}.
 
-\par Researchers have investigated tools that help developers answer reachability
-questions.
-tools such as the \emph{Whyline} can help developers reason about
+\par Researchers have investigated tools that help developers answer 
+reachability questions.
+Tools such as \emph{Whyline} can help developers reason about
 reachability questions by enabling developers to conduct retrospective
 debugging sessions of their programs \cite{ko-2004-whyline}.
-However, Whyline requires a retrospective program execution trace to generate 
-the information needed for a retrospective debugging session. It also limits 
-developers to a preset collection of questions-and-answers that they are able to
+However, Whyline requires a program execution trace to generate the information 
+needed for a retrospective debugging session. It also limits developers to a
+preset collection of questions-and-answers that they are able to
 query.
-\emph{GetMeHere} by Microsoft Research attempts to help developers answer
-reachability questions by translating them into verification problems that
-are dispatched to an \ac{SMT} solver \cite{barnett-2014-get}.
+\emph{GetMeHere} developed by Microsoft Research attempts to help developers 
+answer reachability questions by translating them into verification problems
+that are dispatched to an \ac{SMT} solver \cite{barnett-2014-get}.
 GetMeHere also enables developers to form reachability questions that are more
 general in scope, mitigating the limitations associated with constraining
 the set of possible reachability questions.
@@ -83,15 +91,62 @@ Although the performance of GetMeHere on smaller benchmark programs (e.g.,
 650 - $11,000$ LOC) is promising, it has yet to be evaluated on programs that 
 are more representative of production software systems today.
 
-% TODO: start on the "in this thesis" section.
-% TODO: push this sentence toward the end.
+\par In this thesis, I begin by exploring the reachability questions that
+developers ask in practice by analyzing the results of a survey distributed
+to \numparticipants{} professional software developers.
+To ensure the questions asked in the survey were reflective of real-world
+developer questions, many were selected them from a previous study on 
+reachability questions from LaToza et al. \cite{latoza-2010-reach} and from an
+investigation of questions that developers found challenging to answer
+\cite{latoza-2010-hard-questions}.
+Each question included a code excerpt and a reachability question that a
+developer may encounter during their day-to-day work.
+Developers were asked to rank each reachability question on the frequency with 
+which they encountered them in their work.
 
-For how far tools have evolved to aid developers in the act of \emph{writing}
-code, making the act of \emph{understanding} code easier for developers
-appears to be far more challenging.
-However, this is not an impossible task.
+\par The survey results provided an empirically-supported foundation for the
+development of \emph{\toolname{}}, an extension of the IntelliJ IDEA IDE that
+enables developers to answer popular reachability questions on-the-fly.
+I evaluated the performance of \toolname{} by conducting a user study
+with \userstudynum{} professional software developers.
+Using \toolname{}, developers in our study were able to obtain answers to 
+reachability questions approximately \fasterpct{}\% faster than the control 
+group.
+Most participants in our study also found \toolname{} useful, with 
+\usefulpct{}\% of them reporting that they would use the tool if it was
+available.
+
+\par This thesis makes the following contributions:
+
+\begin{itemize}
+  \item Provides empirical evidence in support of the type and frequency of
+        reachability questions previously investigated by LaToza et al.
+        \cite{latoza-2010-reach}.
+  \item Introduces \toolname, an extension of the IntelliJ IDEA IDE that uses
+        lightweight program analysis methods to enable developers to
+        effectively answer reachability questions that occur in high frequency.
+\end{itemize}
+
+A study of the questions that software developers ask in practice, tools that
+support developer questions, and \emph{how} developers currently explore and 
+answer questions about their programs is explored in Chapter 
+\ref{ch:RelatedWork}. In Chapter \ref{ch:Survey}, I detail the method, 
+results, and threats to validity of the survey used to analyze the type and 
+frequency of reachability questions that professional developers ask in 
+practice. I describe the implementation of \toolname{} in Chapter 4, and discuss
+the user study and evaluation of the tool in Chapter 5.
+Finally, I conclude with a summary of the work in Chapter 6 and describe future
+work and research directions.
+
+\par For how far tools have evolved to aid developers in the act of 
+\emph{writing} code, making the act of \emph{understanding} code easier for 
+developers appears to be far more challenging. However, it is not an impossible 
+task.
 
 \endinput
+
+% TODO: make actual chapters according to the last paragraph.
+% TODO: make this less shitty, jesus christ.
 
 Next steps:
   * Do the "in this thesis" blurb?
