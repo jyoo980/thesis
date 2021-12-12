@@ -5,9 +5,8 @@
 \label{ch:Survey}
 
 \noindent We deployed a survey to investigate the type and frequency of
-questions that developers may encounter during their day-to-day activities.
-
-% TODO: say more?
+reachability questions that developers may encounter during their day-to-day 
+activities.
 
 \section{Method}
 \label{sec:method}
@@ -37,17 +36,17 @@ The survey was deployed entirely online, and consisted of:
 \subsection{Participant Recruitment}
 \label{subsec:ParticipantRecruitment}
 
-\noindent We tweeted the survey to a combined audience of over 2000
-accounts at the time of distribution.
+\noindent
+We distributed the survey on Twitter using our personal accounts.
 In addition to Twitter, the survey was distributed using mailing lists to
 professional software developers.
 
 % TODO: come back to this once we can actually say more about  what we  build
-\par As our tool relies heavily on static program information, we excluded
-respondents who have never used a statically-typed language as their primary
-development language. 
+\par As our tool in its current state is targeted toward developers who
+use statically-typed programming languages, we excluded respondents who have
+never used a statically-typed language as their primary development language.
 We also excluded individuals who do not write code at least once a month,
-as they may not be the primary audience for our tool.
+as they may not be the primary audience for an eventual tool.
 
 \section{Survey Results}
 \label{sec:SurveyResults}
@@ -84,6 +83,21 @@ the sample project were writen to distill the core concepts behind
 reachability and program comprehension questions into a succinct representation.
 Having overly-complicated code excerpts may have impacted the study by
 increasing time-to-completion and drop rate.
+
+\par The code excerpts in our survey were static elements, meaning that the
+only way our participants could interact with the code was to read them
+in isolation.
+Although this furthered our design goal of making the questions encompass
+the core concepts behind reachability questions, it did not accurately
+capture how developers interact with code (e.g., IDE-based navigation, 
+other workflows and tooling) in program comprehension tasks.
+To mitigate this threat, we may have had to design our survey around an IDE 
+that our participants would be able to use.
+However, it is likely that this would have introduced another threat to
+validity; our results may be affected by the proficiency of our participants
+with the IDE we select to use in our study.
+Consequently, we deemed the lack of interactable code excerpts to be an 
+acceptable threat.
 
 \par Another threat to validity is the fact that all the code
 excerpts included in our survey were written in Java.
