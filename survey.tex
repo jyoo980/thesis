@@ -1,8 +1,11 @@
 %% The following is a directive for TeXShop to indicate the main file
 %%!TEX root = diss.tex
 
-\newcommand{\numstarted}{90}
-\newcommand{\numfinished}{65}
+\newcommand{\numStarted}{96}
+\newcommand{\numFinished}{67}
+\newcommand{\writeCodeDaily}{57}
+\newcommand{\writeCodeTwoDays}{9}
+\newcommand{\writeCodeOnceMonth}{1}
 
 \chapter{Survey}
 \label{ch:Survey}
@@ -54,9 +57,23 @@ as they may not be the primary audience for an eventual tool.
 \section{Survey Results}
 \label{sec:SurveyResults}
 
-The survey was started \numstarted{} times, and finished \numfinished{} times
+The survey was started \numStarted{} times, and finished \numFinished{} times
 in total. 
-This yielded a survey completion rate of \printpcnt{\numfinished}{\numstarted}.
+This yielded a survey completion rate of \printpcnt{\numFinished}{\numStarted}.
+First, we describe the demographics of the respondents to our survey, exploring
+their experience as software developers and the programming language(s) used
+in their day-to-day work. 
+We then use these result to inform our analysis of our respondents' experience
+with reachability questions.
+
+\subsection{Demographics}
+\label{subsec:Demographics}
+
+% Say something about where they're from.
+
+$\sim$\printpcnt{\writeCodeDaily}{\numFinished} of respondents reported 
+writing code every day; the remainder reported writing code at least twice a
+week, or once a month.
 
 \section{Threats to Validity}
 \label{sec:ThreatsToValidity}
