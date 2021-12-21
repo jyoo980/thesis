@@ -65,6 +65,8 @@ frequency and difficulty of focused questions that developers ask during
 change tasks.
 LaToza et al. found that a significant portion of a developer's work involves 
 answering reachability questions.
+A reachability question is a search across feasible paths through a program for 
+target statements matching search criteria \cite{latoza-2010-reach}.
 In a survey distributed to 2000 developers employed at Microsoft's Redmond
 campus, 460 developers reported asking questions that could be phrased as 
 reachability questions more than 9 times a day.
@@ -133,12 +135,6 @@ erroneous behaviour that the Whyline attempts to minimize.
 GetMeHere was evaluated on three benchmark programs, all written in C\#.
 The sizes of the benchmark programs ranged from 650 to $11,000$ lines of code,
 which is relatively small by modern standards.
-
-% TODO: talk a bit about performance?
-% Wasn't tested on a production system
-% Calculator: 650 lines of C#
-% Tetris: 3000 lines of C#
-% Tailspin Toys: 11k lines of C#
 
 \section{How Developers Use Tools to Understand Programs}
 \label{sec:HowDevelopersUseToolsToUnderstandPrograms}
