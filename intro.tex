@@ -75,10 +75,18 @@ the argument \texttt{a}.
 \par Tools such as \emph{Whyline} can help developers reason about
 reachability questions by enabling developers to conduct retrospective
 debugging sessions of their programs \cite{ko-2004-whyline}.
-However, Whyline requires a program execution trace to generate the information 
-needed for a retrospective debugging session. It also limits developers to a
-preset collection of questions-and-answers that they are able to
-query.
+
+Whyline requires developers to run a program to collect an execution history.
+It then conducts an offline dynamic analysis on the execution history to 
+generate the information required for a retroactive debugging session.
+Using Whyline, developers are able to inspect a preset collection of question-
+and-answer pairs about the state of their programs that they may use to help
+answer reachability questions.
+
+% TODO: maybe include a figure of the Whyline interface, talk a little bit
+%       about how it looks, and how it's different from what developers
+%       usually see.
+
 \emph{GetMeHere} developed by Microsoft Research attempts to help developers 
 answer reachability questions by translating them into verification problems
 that are dispatched to an \ac{SMT} solver \cite{barnett-2014-get}.
@@ -93,8 +101,7 @@ are more representative of production software systems today.
 answering reachability questions; both Whyline and GetMeHere provide incredible 
 amounts of information for developers.
 However, it is unclear whether this information is presented in a usable
-manner.
-Developers are incredibly prone to the problem of information overload.
+manner, and what effects it may have on the problem of information overload.
 % TODO: citation needed.
 
 \par In this thesis, I begin by exploring the reachability questions that
