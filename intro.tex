@@ -72,20 +72,23 @@ program for the set of feasible control-flow paths that terminate at the
 method \texttt{m}, filtering for statements that include dependencies for
 the argument \texttt{a}.
 
-\par Tools such as \emph{Whyline} can help developers reason about
+\par Tools such as the \emph{Whyline} can help developers reason about
 reachability questions by enabling developers to conduct retrospective
 debugging sessions of their programs \cite{ko-2004-whyline}.
-
-Whyline requires developers to run a program to collect an execution history.
+The Whyline requires developers to run a program to collect an execution 
+history.
 It then conducts an offline dynamic analysis on the execution history to 
 generate the information required for a retroactive debugging session.
-Using Whyline, developers are able to inspect a preset collection of question-
-and-answer pairs about the state of their programs that they may use to help
-answer reachability questions.
-
-% TODO: maybe include a figure of the Whyline interface, talk a little bit
-%       about how it looks, and how it's different from what developers
-%       usually see.
+Using the Whyline, developers are able to inspect a preset collection of 
+question-and-answer pairs about the state of their programs that they may use 
+to help answer reachability questions.
+The Whyline exists as a separate tool that is complementary to a developer's
+existing \ac{IDE}, which may help in enforcing a separation of concerns between
+a development environment and a purpose-built program comprehension tool.
+However, it introduces the question of how best to display program information 
+in a useful \emph{and} usable manner; creating a separate environment that
+may present information in an unfamiliar context may have unintended effects
+on a developer's cognitive load.
 
 \emph{GetMeHere} developed by Microsoft Research attempts to help developers 
 answer reachability questions by translating them into verification problems
