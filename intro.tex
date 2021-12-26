@@ -93,12 +93,26 @@ on a developer's cognitive load.
 \emph{GetMeHere} developed by Microsoft Research attempts to help developers 
 answer reachability questions by translating them into verification problems
 that are dispatched to an \ac{SMT} solver \cite{barnett-2014-get}.
+Similarly to the Whyline, GetMeHere performs an analysis on runtime information
+in the form of a program execution trace.
+However, the developer does not need to explicitly run a program or parts of a 
+program to collect an execution trace; GetMeHere automatically generates an 
+execution trace, including any relevant input necessary to reach those parts of 
+code \cite{barnett-2014-get}.
 GetMeHere also enables developers to form reachability questions that are more
 general in scope, mitigating the limitations associated with constraining
 the set of possible reachability questions.
+Unlike the WhyLine, GetMeHere is not built as a standalone tool, but is
+integrated into existing \ac{IDE}, namely, Microsoft Visual Studio.
 Although the performance of GetMeHere on smaller benchmark programs (e.g.,
 650 - $11,000$ LOC) is promising, it has yet to be evaluated on programs that 
 are more representative of production software systems today.
+Although GetMeHere is integrated into an existing \ac{IDE}, it presents program
+information in a visualization that is based on the Code Bubbles paradigm
+cite{barnett-2014-get, bragdon-2010-code-bubbles}.
+This gives rise to the same question presented by how the Whyline presents
+information to a developer; the effects of presenting program information in
+an unfamiliar visual paradigm are not well-understood.
 
 \par It is clear that developers have tools at their disposal that aid them in
 answering reachability questions; both Whyline and GetMeHere provide incredible 
@@ -138,9 +152,9 @@ available.
   \item Provides empirical evidence in support of the type and frequency of
         reachability questions previously investigated by LaToza et al.
         \cite{latoza-2010-reach}.
-  \item Introduces \toolname, an extension of the IntelliJ IDEA IDE that uses
-        lightweight program analysis methods to enable developers to
-        effectively answer reachability questions that occur in high frequency.
+  \item Introduces \toolname, an extension of the IntelliJ IDEA IDE that 
+        presents an interface that developers may use to effectively answer 
+        reachability questions that occur in high frequency.
 \end{itemize}
 
 A study of the questions that software developers ask in practice, tools that
