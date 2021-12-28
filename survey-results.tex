@@ -1,83 +1,65 @@
 %% The following is a directive for TeXShop to indicate the main file
 %%!TEX root = diss.tex
 
-% TODO: Make sure I pick a value that matches up (y-axis)
+\pgfplotstableread{
+Scenarios       {I never ask myself this question} 2 Neutral 4 {I often ask myself this question}
+{1} 2 8 1 29 24
+{2} 1 9 4 19 21
+{3} 9 19 3 19 8
+{4} 4 15 3 23 8 
+{5} 3 8 2 28 18
+{6} 11 11 4 13 20
+{7} 3 18 2 15 20 
+{8} 3 9 6 13 19
+{9} 3 7 2 14 30
+}\testdata
 
-\subfloat[]{%
+\resizebox {\textwidth} {!} {
 \begin{tikzpicture}
+\centering
+\definecolor{clr1}{RGB}{158, 61, 34}
+\definecolor{clr2}{RGB}{242, 136, 45}
+\definecolor{clr3}{RGB}{177, 181, 182}
+\definecolor{clr4}{RGB}{117, 164, 201}
+\definecolor{clr5}{RGB}{42, 87, 131}
 \begin{axis}[
-    ybar=0pt,
-    scale = 0.6,
-    /pgf/number format/1000 sep={},
-    xticklabels={1, 2, 3, 4, 5},
-    xtick = {1,2,3,4,5},
-    ymin = 0,
-    ymax = 30,
-    ylabel = {Number of Respondents},
-    enlarge x limits=0.25
-]
-\addplot coordinates {
-    (1, 2) (2, 8) (3, 1) (4, 29) (5, 24)
-};
+            name=ax1,
+            legend cell align=left,
+            legend columns=-1,
+            legend style={at={(1,-0.15)},anchor=north,draw=none},
+            xbar stacked,
+            height=250,
+            xmin=-100,
+            xticklabel=\pgfmathparse{abs(\tick)}\pgfmathprintnumber{\pgfmathresult}\,$\%$,
+            xmax=0,
+            ytick=data,
+            ylabel={Development Scenario},
+            yticklabels from table={\testdata}{Scenarios}
+            ]
+\addplot [fill=clr1] table [x expr=-\thisrow{I never ask myself this question}, meta=Scenarios,y expr=\coordindex] {\testdata};
 \end{axis}
-\end{tikzpicture}%
-}
 
-\subfloat[]{%
-\begin{tikzpicture}
 \begin{axis}[
-    ybar=0pt,
-    scale = 0.6,
-    /pgf/number format/1000 sep={},
-    xticklabels={1, 2, 3, 4, 5},
-    xtick = {1,2,3,4,5},
-    ymin = 0,
-    ymax = 31,
-    enlarge x limits=0.25
-]
-\addplot coordinates {
-    (1, 1) (2, 9) (3, 4) (4, 19) (5, 31)
-};
+            at=(ax1.south east),
+            xbar stacked,
+            xmin=0,
+            xmax=100,
+            height=250,
+            xticklabel=\pgfmathprintnumber{\tick}\,$\%$,
+            ytick=data,
+            yticklabels={}
+            ]
+\addlegendimage{fill=clr1}
+\addlegendentry{Never}
+\addplot [fill=clr2] table [x=2, meta=Scenarios, y expr=\coordindex] {\testdata};
+\addlegendentry{Rarely}
+\addplot [fill=clr3] table [x=Neutral, meta=Scenarios, y expr=\coordindex] {\testdata};
+\addlegendentry{Unsure}
+\addplot [fill=clr4] table [x=4, meta=Scenarios, y expr=\coordindex] {\testdata};
+\addlegendentry{Sometimes}
+\addplot [fill=clr5] table [x={I often ask myself this question}, meta=Scenarios, y expr=\coordindex] {\testdata};
+\addlegendentry{Often}
 \end{axis}
-\end{tikzpicture}%
+\end{tikzpicture}
 }
-
-\subfloat[]{%
-\begin{tikzpicture}
-\begin{axis}[
-    ybar=0pt,
-    scale = 0.6,
-    /pgf/number format/1000 sep={},
-    xticklabels={1, 2, 3, 4, 5},
-    xtick = {1,2,3,4,5},
-    ymin = 0,
-    ymax = 31,
-    enlarge x limits=0.25
-]
-\addplot coordinates {
-    (1, 9) (2, 19) (3, 3) (4, 19) (5, 8)
-};
-\end{axis}
-\end{tikzpicture}%
-}
-
-% TODO: this blows up
-% \subfloat[]{%
-% \begin{tikzpicture}
-% \begin{axis}[
-%     ybar=0pt,
-%     scale = 0.6,
-%     /pgf/number format/1000 sep={},
-%     xticklabels={1, 2, 3, 4, 5},
-%     xtick = {1,2,3,4,5},
-%     ymin = 0,
-%     ymax = 31,
-%     enlarge x limits=0.25
-% ]
-% \addplot coordinates {
-%     (1, 4) (2, 15) (3, 3) (4, 23) (5, 8)
-% };
-% \end{axis}
-% \end{tikzpicture}%
-% }
 
