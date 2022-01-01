@@ -82,14 +82,6 @@ undertaken by devevlopers, 9 were associated with reachability questions
 \section{Tools that Support Developer Questions}
 \label{sec:ToolsSupportDeveloperQuestions}
 
-% \noindent Different approaches have been taken to building tools 
-% that enable developers to answer questions about their code.
-
-% Some tools such as the Whyline exploit dynamic analysis by using information 
-% generated from an offline analysis of program execution trace to 
-% presenting developers with a subset of pre-defined questions and answers 
-% they may choose to investigate after runtime \cite{ko-2004-whyline}.
-
 \noindent Tools today employ both dynamic and static approaches to gathering
 program information for developers.
 The Whyline analyzes runtime information gathered from an offline dynamic
@@ -100,9 +92,12 @@ translating high-level developer questions into program verification questions
 that are dispatched to an \ac{SMT} solver \cite{barnett-2014-get}, removing the 
 need for developers to run their programs to analyze them.
 
+\subsection{The Whyline}
+\label{subsec:TheWhyline}
+
 \par The Whyline was initially developed as an interogative debugging interface
-for the Alice programming language, and later augmented to support the Java
-programming language and the needs of professional developers.
+for the Alice programming language. Later, the Java Whyline was developed to 
+support the Java programming language and the needs of professional developers.
 At a high-level, the Whyline enables developers to select questions about a
 program's output, and it then helps developers to work back from from the 
 selected output to its causes \cite{ko-2009-java-whyline}.
@@ -127,12 +122,14 @@ It was found that the Whyline users were successful about three times as often
 and about twice as fast compared to the control group who used conventional
 debugging tools and techniques.
 
-\par TODO: talk about Whyline's interface with developers.
+\par TODO: talk about the developer interface to the Whyline.
 
-\par Other tools encourage the developer to take a more active approach in
-formulating questions about programs and their behaviour.
-Similar to the Whyline, GetMeHere enables developers to select a line of code 
-as a point of interest and visualize the execution that reaches the given point.
+\subsection{GetMeHere}
+\label{subsec:GetMeHere}
+
+\par Similar to the Whyline, GetMeHere enables developers to select a line of 
+code as a point of interest and visualize the execution that reaches the given 
+point.
 Where it differs, however, is in how it is able to generate this execution
 by using an SMT-based static analysis \cite{barnett-2014-get} without having to
 execute the code.
@@ -145,6 +142,8 @@ erroneous behaviour that the Whyline attempts to minimize.
 GetMeHere was evaluated on three benchmark programs, all written in C\#.
 The sizes of the benchmark programs ranged from 650 to $11,000$ lines of code,
 which is relatively small by modern standards.
+
+\par TODO: talk about the developer interface to GetMeHere.
 
 \section{How Developers Use Tools to Understand Programs}
 \label{sec:HowDevelopersUseToolsToUnderstandPrograms}
