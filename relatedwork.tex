@@ -82,15 +82,23 @@ undertaken by devevlopers, 9 were associated with reachability questions
 \section{Tools that Support Developer Questions}
 \label{sec:ToolsSupportDeveloperQuestions}
 
-\noindent Different approaches have been taken to building tools 
-that enable developers to answer questions about their code.
-Some tools such as the Whyline present a more passive approach,
-presenting developers with a subset of pre-defined questions and answers 
-they may choose to investigate after runtime \cite{ko-2004-whyline}.
-Other tools present a more active approach; GetMeHere developed
-at Microsoft Research enables developers to form their own queries about
-the behaviour of their programs, and provides answers to them without needing
-an explicit execution trace \cite{barnett-2014-get}.
+% \noindent Different approaches have been taken to building tools 
+% that enable developers to answer questions about their code.
+
+% Some tools such as the Whyline exploit dynamic analysis by using information 
+% generated from an offline analysis of program execution trace to 
+% presenting developers with a subset of pre-defined questions and answers 
+% they may choose to investigate after runtime \cite{ko-2004-whyline}.
+
+\noindent Tools today employ both dynamic and static approaches to gathering
+program information for developers.
+The Whyline analyzes runtime information gathered from an offline dynamic
+analysis of an execution trace to generate a set of question and answer pairs
+that are presented to developers \cite{ko-2004-whyline}.
+GetMeHere developed at Microsoft Research leverages static analysis by
+translating high-level developer questions into program verification questions
+that are dispatched to an \ac{SMT} solver \cite{barnett-2014-get}, removing the 
+need for developers to run their programs to analyze them.
 
 \par The Whyline was initially developed as an interogative debugging interface
 for the Alice programming language, and later augmented to support the Java
@@ -118,6 +126,8 @@ isolating the causes of two bug reports from an open source project.
 It was found that the Whyline users were successful about three times as often
 and about twice as fast compared to the control group who used conventional
 debugging tools and techniques.
+
+\par TODO: talk about Whyline's interface with developers.
 
 \par Other tools encourage the developer to take a more active approach in
 formulating questions about programs and their behaviour.
