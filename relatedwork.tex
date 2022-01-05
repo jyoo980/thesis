@@ -88,9 +88,9 @@ The Whyline analyzes runtime information gathered from an offline dynamic
 analysis of an execution trace to generate a set of question and answer pairs
 that are presented to developers \cite{ko-2004-whyline}.
 GetMeHere developed at Microsoft Research leverages static analysis by
-translating high-level developer questions into program verification questions
-that are dispatched to an \ac{SMT} solver \cite{barnett-2014-get}, removing the 
-need for developers to run their programs to analyze them.
+translating high-level developer questions into low-level program verification 
+problems that are dispatched to an \ac{SMT} solver \cite{barnett-2014-get}, 
+removing the need for developers to run their programs to analyze them.
 
 \subsection{The Whyline}
 \label{subsec:TheWhyline}
@@ -107,8 +107,8 @@ For example, consider a case when a variable \texttt{foo} is being erroneously
 set to some value \texttt{v}.
 A developer could choose to investigate the cause of this erroneous program
 behaviour by running the program, opening the Whyline window and selecting
-``why did \texttt{foo} $=$ \texttt{v}?" and a \emph{temporal context}, which is 
- a specified time-frame that they wish to investigate.
+``why did \texttt{foo} $=$ \texttt{v}?" and a \emph{temporal context}, which is
+a specified time-frame that they wish to investigate.
 The Whyline then presents a view of all statments of the program within the
 temporal context that contributed to the line where \texttt{foo} has the value
 \texttt{x}. 
@@ -122,7 +122,9 @@ It was found that the Whyline users were successful about three times as often
 and about twice as fast compared to the control group who used conventional
 debugging tools and techniques.
 
-\par TODO: talk about the developer interface to the Whyline.
+\par Although the Whyline was designed as a stand-alone tool, it presents an 
+interface to a developer that resembles those of commonly used \acp{IDE} such
+as Microsoft Visual Studio or IntellIJ IDEA.
 
 \subsection{GetMeHere}
 \label{subsec:GetMeHere}
