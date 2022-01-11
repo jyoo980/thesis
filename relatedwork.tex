@@ -124,7 +124,30 @@ debugging tools and techniques.
 
 \par Although the Whyline was designed as a stand-alone tool, it presents an 
 interface to a developer that resembles those of commonly used \acp{IDE} such
-as Microsoft Visual Studio or IntellIJ IDEA.
+as Microsoft Visual Studio, IntelliJ IDEA, and Eclipse.
+Figure \ref{fig:WhylineQuestion} shows the Whyline interface as it is used
+to investigate the output of a \ac{GUI} application.
+Developers are able to choose a question from the dropdown menu that appears
+next to some observable program output.
+The Whyline then presents a view that traces the execution of the program
+to the specific lines that have an effect on the output under investigation.
+This view is presented in Figure \ref{fig:WhylineTrace},
+where an editor-like view shows two lines of code in different source files
+that affect program output.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{./figs/whyline-question-interface.png}
+\caption{The interrogative debugging interface presented by Whyline.}
+\label{fig:WhylineQuestion}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{./figs/whyline-trace-back.png}
+\caption{The high-level program trace presented by Whyline.}
+\label{fig:WhylineTrace}
+\end{figure}
 
 \subsection{GetMeHere}
 \label{subsec:GetMeHere}
