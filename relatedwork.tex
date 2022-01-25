@@ -168,7 +168,12 @@ GetMeHere was evaluated on three benchmark programs, all written in C\#.
 The sizes of the benchmark programs ranged from 650 to $11,000$ lines of code,
 which is relatively small by modern standards.
 
-\par TODO: talk about the developer interface to GetMeHere.
+\par Unlike the Whyline, GetMeHere was built as an extension to the Visual
+Studio \ac{IDE}, and not as a standalone application.
+GetMeHere displays an execution trace using the Microsoft Debugger Canvas 
+\cite{bragdon-2012-canvas}, an industrial implementation of the earlier 
+Code Bubbles \cite{bragdon-2010-code-bubbles} paradigm for Visual Studio
+\cite{barnett-2014-get}.
 
 \section{How Developers Use Tools to Understand Programs}
 \label{sec:HowDevelopersUseToolsToUnderstandPrograms}
@@ -215,7 +220,7 @@ support on-the-fly queries.
 GetMeHere attempts to bypass the need for an execution trace and provide support
 for on-demand queries by translating high-level developer questions into SMT
 instances. 
-Although the results presented by Barnett et al. is promising, the
+Although the results presented by Barnett et al. are promising, the
 relatively small size of the systems GetMeHere was evaluated on leaves more to
 be investigated about the scalability of their approach.
 
