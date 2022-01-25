@@ -2,68 +2,52 @@
 %%!TEX root = diss.tex
 
 \pgfplotstableread{
-Scenarios {I never ask myself this question} 2 Neutral 4 {I often ask myself this question}
-1 2 8 1 29 24
-2 1 9 4 19 21
-3 9 19 3 19 8
-4 4 15 3 23 8 
-5 3 8 2 28 18
-6 11 11 4 13 20
-7 3 18 2 15 20 
-8 3 9 6 13 19
-9 3 7 2 14 30
-}\testdata
+  Scenarios {I never ask myself this question} 2 Neutral 4 {I often ask myself this question}
+  1  2	8	4	29	24
+  2  1	9	7	19	31
+  3  9	19	12	19	8
+  4  4	15	17	23	8
+  5  3	8	10	28	18
+  6  11	11	12	13	20
+  7  3	18	11	15	20
+  8  3	9	23	13	19
+  9  3	7	13	14	30
+}
+\testdata
 
-\resizebox {\textwidth} {!} {
-\begin{tikzpicture}
-\centering
 \definecolor{clr1}{RGB}{158, 61, 34}
 \definecolor{clr2}{RGB}{242, 136, 45}
 \definecolor{clr3}{RGB}{177, 181, 182}
 \definecolor{clr4}{RGB}{117, 164, 201}
 \definecolor{clr5}{RGB}{42, 87, 131}
-\begin{axis}[
-  name=ax1,
-  legend cell align=left,
-  legend columns=-1,
-  legend style={at={(1,-0.15)},anchor=north,draw=none},
-  xbar stacked,
-  height=350,
-  bar width=25,
-  xmin=-100,
-  xticklabel=\pgfmathparse{abs(\tick)}\pgfmathprintnumber{\pgfmathresult}\,$\%$,
-  xmax=0,
-  ytick=data,
-  ylabel={Development Scenario},
-  yticklabels from table={\testdata}{Scenarios}
-]
-\addplot [fill=clr1] table [
-  x expr=-\thisrow{I never ask myself this question}, meta=Scenarios,y expr=\coordindex
-] {\testdata};
-\end{axis}
 
-\begin{axis}[
-  at=(ax1.south east),
-  xbar stacked,
-  xmin=0,
-  xmax=100,
-  height=350,
-  bar width=25,
-  xticklabel=\pgfmathprintnumber{\tick}\,$\%$,
-  ytick=data,
-  yticklabels={},
-]
-\addlegendimage{fill=clr1}
-\addlegendentry{Never}
-\addplot [fill=clr2] table [x=2, meta=Scenarios, y expr=\coordindex] {\testdata};
-\addlegendentry{Rarely}
-\addplot [fill=clr3] table [x=Neutral, meta=Scenarios, y expr=\coordindex] {\testdata};
-\addlegendentry{Unsure}
-\addplot [fill=clr4] table [x=4, meta=Scenarios, y expr=\coordindex] {\testdata};
-\addlegendentry{Sometimes}
-\addplot [fill=clr5] table [x={I often ask myself this question}, meta=Scenarios, y expr=\coordindex] {\testdata};
-\addlegendentry{Often}
-\end{axis}
+\begin{tikzpicture}
+  \begin{axis}[
+    width=\columnwidth,
+    xbar stacked,   % Stacked horizontal bars
+    bar width={15.0pt},
+    xmin=0,         % Start x axis at 0
+    ytick=data,     % Use as many tick labels as y coordinates
+    legend style={at={(axis cs:65,0.2)},anchor=south},
+    yticklabels from table={\testdata}{Scenarios}  % Get the labels from the Label column of the \datatable
+  ]
+  \addplot [fill=clr1] table [x={I never ask myself this question}, meta=Scenarios,y expr=\coordindex] {\testdata};
+  \addplot [fill=clr2] table [x=2, meta=Scenarios,y expr=\coordindex] {\testdata};
+  \addplot [fill=clr3,
+      point meta=x
+      % nodes near coords,
+      % nodes near coords align={anchor=west},
+      % every node near coord/.append style={
+      %     black,
+      %     fill=white,
+      %     fill opacity=0.75,
+      %     text opacity=1,
+      %     outer sep=\pgflinewidth % so the label fill doesn't overlap the plot
+      % }
+  ] table [x=Neutral, meta=Scenarios,y expr=\coordindex] {\testdata};
+  \addplot [fill=clr4] table [x=4, meta=Scenarios,y expr=\coordindex] {\testdata};
+  \addplot [fill=clr5] table [x={I often ask myself this question}, meta=Scenarios,y expr=\coordindex] {\testdata};
+  % \legend{I never ask myself this question, 2, Neutral, 3, {I often ask myself this question}}
+  \end{axis}
 \end{tikzpicture}
-}
 
