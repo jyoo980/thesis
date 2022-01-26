@@ -28,6 +28,7 @@
     bar width={15.0pt},
     xmin=0,         % Start x axis at 0
     ytick=data,     % Use as many tick labels as y coordinates
+    legend columns=5,
     legend style={at={(axis cs:65,0.2)},anchor=south},
     yticklabels from table={\testdata}{Scenarios}, % Get the labels from the Label column of the \datatable
     ylabel={Development Scenario},
@@ -37,18 +38,7 @@
   \addlegendentry{Never}
   \addplot [fill=clr2] table [x=2, meta=Scenarios,y expr=\coordindex] {\testdata};
   \addlegendentry{Rarely}
-  \addplot [fill=clr3,
-      point meta=x
-      % nodes near coords,
-      % nodes near coords align={anchor=west},
-      % every node near coord/.append style={
-      %     black,
-      %     fill=white,
-      %     fill opacity=0.75,
-      %     text opacity=1,
-      %     outer sep=\pgflinewidth % so the label fill doesn't overlap the plot
-      % }
-  ] table [x=Neutral, meta=Scenarios,y expr=\coordindex] {\testdata};
+  \addplot [fill=clr3, point meta=x] table [x=Neutral, meta=Scenarios,y expr=\coordindex] {\testdata};
   \addlegendentry{Unsure}
   \addplot [fill=clr4] table [x=4, meta=Scenarios,y expr=\coordindex] {\testdata};
   \addlegendentry{Sometimes}
