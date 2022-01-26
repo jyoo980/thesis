@@ -1,32 +1,32 @@
 %% The following is a directive for TeXShop to indicate the main file
 %%!TEX root = diss.tex
 
-\newcommand{\numStarted}{100}
-\newcommand{\numFinished}{67}
-\newcommand{\writeCodeDaily}{57}
+\newcommand{\numStarted}{103}
+\newcommand{\numFinished}{69}
+\newcommand{\writeCodeDaily}{59}
 \newcommand{\writeCodeTwoDays}{9}
 \newcommand{\writeCodeOnceMonth}{1}
 
 % Respondent numbers by Country
 \newcommand{\canada}{21}
-\newcommand{\usa}{20}
+\newcommand{\usa}{21}
 \newcommand{\germany}{8}
 \newcommand{\russia}{8}
 \newcommand{\uk}{2}
 
 % YoE as percentages
-\newcommand{\zeroToTwo}{26.87}
-\newcommand{\twoToFive}{29.85}
-\newcommand{\fiveToSeven}{11.94}
-\newcommand{\sevenPlus}{31.34}
+\newcommand{\zeroToTwo}{26.09}
+\newcommand{\twoToFive}{30.43}
+\newcommand{\fiveToSeven}{11.59}
+\newcommand{\sevenPlus}{31.88}
 
 % Language usage percentages
-\newcommand{\java}{14.93}
-\newcommand{\kotlin}{13.43}
-\newcommand{\python}{13.43}
-\newcommand{\cpp}{11.94}
-\newcommand{\typescript}{11.94}
-\newcommand{\other}{34.33}
+\newcommand{\java}{14.49}
+\newcommand{\kotlin}{13.04}
+\newcommand{\python}{14.49}
+\newcommand{\cpp}{11.59}
+\newcommand{\typescript}{11.59}
+\newcommand{\other}{34.80}
 
 \chapter{Survey}
 \label{ch:Survey}
@@ -111,7 +111,7 @@ week, or once a month.
 \par Many of our respondents had over seven years' worth of development 
 experience (\sevenPlus{}\%), while \twoToFive\% of respondents had two to five 
 years' worth of experience. 
-The remainder of the respondents had zero to two or five to seven years' worth
+The remainder of the respondents had zero to two, or five to seven years' worth
 of total experience (Table \ref{tab:Demographics}).
 
 \par A total of 15 unique programming languages were reported as being used by
@@ -125,9 +125,9 @@ including Swift, C\#, and Objective-C.
 A more detailed enumeration is available in the supplementary data archive.
 
 \par A majority of our respondents reported being employeed at companies that
-have more than 1000 employees (61.20\%).
-19.41\% of respondents reported working at a company with less than 100
-employees, and the remaining 19.39\% of respondents reported working at
+have more than 1000 employees (59.42\%).
+20.29\% of respondents reported working at a company with less than 100
+employees, and the remaining 20.29\% of respondents reported working at
 companies that had a range of 100 to 1000 employees.
 
 \begin{table}[ht]
@@ -142,7 +142,7 @@ companies that had a range of 100 to 1000 employees.
 2 - 5 years                & \twoToFive\%        \\
 5 - 7 years                & \fiveToSeven\%      \\
 Over 7 years               & \sevenPlus\%        \\
-\multicolumn{2}{l}{\textbf{Programming language used most frequently}} \\
+\multicolumn{2}{l}{\textbf{Programming language used most frequently}} \\ 
 Java                       & \java\%       \\
 Kotlin                     & \kotlin\%     \\
 Python                     & \python\%     \\
@@ -151,11 +151,11 @@ TypeScript                 & \typescript\% \\
 Other                      & \other\%      \\
 % TODO: I really dislike the table heading here... think of a better one.
 \multicolumn{2}{l}{\textbf{Number of employees in company}} \\
-Over 5000                  & 26.87\% \\
-1000 - 4999                & 34.33\% \\
-500 - 999                  &  7.46\% \\
-100 - 499                  & 11.94\% \\
-Less than 100              & 19.41\% \\
+Over 5000                  & 26.09\% \\
+1000 - 4999                & 33.33\% \\
+500 - 999                  &  7.25\% \\
+100 - 499                  & 13.04\% \\
+Less than 100              & 20.29\% \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -163,11 +163,15 @@ Less than 100              & 19.41\% \\
 \subsection{Quantitative Results}
 \label{subsec:QuantitativeResults}
 
-TODO: preamble.
+Figure \ref{fig:SurveyResults} presents the responses provided by 
+\numFinished{} software developers to 9 questions that were contextualized
+with a software development scenario.
+The questions and scenarios are detailed in full in Appendix 
+\ref{sec:DevelopmentQuestions}.
 
 \begin{figure}[ht]
 \centering
-\caption{Responses categorized by development scenario}
+\caption{Responses categorized by development question}
 \input{survey-results}
 \label{fig:SurveyResults}
 \end{figure}
