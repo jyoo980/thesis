@@ -3,15 +3,15 @@
 
 \pgfplotstableread{
   Scenarios {I never ask myself this question} 2 Neutral 4 {I often ask myself this question}
-  1  2	8	4	29	24
-  2  1	9	7	19	31
-  3  9	19	12	19	8
-  4  4	15	17	23	8
-  5  3	8	10	28	18
-  6  11	11	12	13	20
-  7  3	18	11	15	20
-  8  3	9	23	13	19
   9  3	7	13	14	30
+  8  3	9	23	13	19
+  7  3	18	11	15	20
+  6  11	11	12	13	20
+  5  3	8	10	28	18
+  4  4	15	17	23	8
+  3  9	19	12	19	8
+  2  1	9	7	19	31
+  1  2	8	4	29	24
 }
 \testdata
 
@@ -20,8 +20,8 @@
 \definecolor{clr3}{RGB}{177, 181, 182}
 \definecolor{clr4}{RGB}{117, 164, 201}
 \definecolor{clr5}{RGB}{42, 87, 131}
-
 \begin{tikzpicture}
+  \centering
   \begin{axis}[
     width=\columnwidth,
     xbar stacked,   % Stacked horizontal bars
@@ -29,10 +29,14 @@
     xmin=0,         % Start x axis at 0
     ytick=data,     % Use as many tick labels as y coordinates
     legend style={at={(axis cs:65,0.2)},anchor=south},
-    yticklabels from table={\testdata}{Scenarios}  % Get the labels from the Label column of the \datatable
+    yticklabels from table={\testdata}{Scenarios}, % Get the labels from the Label column of the \datatable
+    ylabel={Development Scenario},
+    legend style={at={(0.5,-0.1)},anchor=north},
   ]
   \addplot [fill=clr1] table [x={I never ask myself this question}, meta=Scenarios,y expr=\coordindex] {\testdata};
+  \addlegendentry{Never}
   \addplot [fill=clr2] table [x=2, meta=Scenarios,y expr=\coordindex] {\testdata};
+  \addlegendentry{Rarely}
   \addplot [fill=clr3,
       point meta=x
       % nodes near coords,
@@ -45,9 +49,11 @@
       %     outer sep=\pgflinewidth % so the label fill doesn't overlap the plot
       % }
   ] table [x=Neutral, meta=Scenarios,y expr=\coordindex] {\testdata};
+  \addlegendentry{Unsure}
   \addplot [fill=clr4] table [x=4, meta=Scenarios,y expr=\coordindex] {\testdata};
+  \addlegendentry{Sometimes}
   \addplot [fill=clr5] table [x={I often ask myself this question}, meta=Scenarios,y expr=\coordindex] {\testdata};
-  % \legend{I never ask myself this question, 2, Neutral, 3, {I often ask myself this question}}
+  \addlegendentry{Often}
   \end{axis}
 \end{tikzpicture}
 
