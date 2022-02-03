@@ -60,9 +60,12 @@ the control-flow or the data-flow through a program, such as
 ``what parts of this data structure are being accessed in this code?" 
 \cite{sillito-2006-questions-during-task}.
 
+\subsection{Reachability Questions}
+\label{subsec:ReachabilityQuestions}
+
 \par Researchers have conducted studies that investigate both the 
-frequency and difficulty of focused questions that developers ask during 
-change tasks.
+frequency and difficulty of answering some of the focused questions that 
+developers ask during change tasks.
 LaToza et al. found that a significant portion of a developer's work involves 
 answering reachability questions.
 A reachability question is a search across feasible paths through a program for 
@@ -78,6 +81,50 @@ investigating them is also time-consuming.
 A field study of 17 developers found that of the 10 longest activities
 undertaken by devevlopers, 9 were associated with reachability questions
 \cite{latoza-2010-reach}.
+
+\noindent LaToza et al. formalized two types of reachability questions, named
+\textit{find} and \textit{compare} \cite{latoza-2010-reach}.
+A \textit{find} question is of the form \findq{}; where \textit{SC} and
+\textit{TR} are variable parameters.
+\textit{TR} represents a set of concrete program traces, where each trace 
+\textit{tr} is a list of tuples $\langle s, env \rangle$. 
+In each tuple, $s$ is a statement, and $env$ maps each variable in $s$ to a
+value.
+\textit{SC} represents search criteria that acts a a function that prunes the
+set of traces \textit{TR} to a subset that is relevant to the reachability
+question being asked.
+As an example of a \textit{find} question, a developer may ask: ``where does
+the string \bsq{error} come up in the control-flow of this method called 
+\texttt{openConnection}?"
+To formalize this into a \textit{find} question, we define \textit{SC} as
+$grep(`error\textrm')$, and \textit{TR} as 
+$trace(p, m_{start}, m_{end}, C)$, where $p$ is the entire program under
+inspection, $m_{start}$ and $m_{end}$ represent the start and end of the
+control-flow of the method \texttt{openConnection}, and $C$ is a filtering
+constraint that is left unspecified.
+The resulting formalization is:
+
+\begin{align*}
+  find \ grep(`error\textrm') \ in \ trace(p, m_{start}, m_{end}, C)
+\end{align*}
+
+% TODO: chat about the result above.
+
+A \textit{compare} question requires the analysis of two concrete traces, and
+is of the form \compareq{}.
+First, an attempt is made to match each trace $tr_a \in TR_a$ to a trace 
+$tr_b \in TR_b$.
+The result of this operation may be represented as a list of tuples 
+$\langle tr_a, tr_b \rangle$.
+For each tuple in the resulting list, \textit{compare} attempts to match 
+$\langle s_a, env_a\rangle \in tr_a$ to $\langle s_b, env_b \rangle \in tr_b$.
+Each matching tuple is coalesced into traces $tr_{common}$, that form one
+of the outputs of the \textit{compare} question: $TR_{common}$.
+The tuples in $tr_a$ and $tr_b$ for which no match is found are collected into
+the outputs $TR_1$ and $TR_2$.
+
+% TODO: give a concretization of a a compare question.
+
 
 \section{Tools that Support Developer Questions}
 \label{sec:ToolsSupportDeveloperQuestions}
