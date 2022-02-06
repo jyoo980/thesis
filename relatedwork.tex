@@ -79,7 +79,7 @@ reachability questions as at least somewhat hard to answer.
 Not only are reachability questions difficult to answer, but the process of
 investigating them is also time-consuming.
 A field study of 17 developers found that of the 10 longest activities
-undertaken by devevlopers, 9 were associated with reachability questions
+undertaken by developers, 9 were associated with reachability questions
 \cite{latoza-2010-reach}.
 
 \noindent LaToza et al. formalized two types of reachability questions, named
@@ -98,16 +98,14 @@ the string \bsq{error} come up in the control-flow of this method called
 \texttt{openConnection}?"
 To formalize this into a \textit{find} question, we define \textit{SC} as
 $grep(`error\textrm')$, and \textit{TR} as 
-$trace(p, m_{start}, m_{end}, C)$, where $p$ is the entire program under
+$trace(p, \ m_{start}, \ m_{end}, \ C)$, where $p$ is the entire program under
 inspection, $m_{start}$ and $m_{end}$ represent the start and end of the
 control-flow of the method \texttt{openConnection}, and $C$ is a filtering
 constraint that is left unspecified.
 The resulting formalization is:
-
 \begin{align*}
-  find \ grep(`error\textrm') \ in \ trace(p, m_{start}, m_{end}, C)
+  find \ grep(`error\textrm') \ in \ trace(p, \ m_{start}, \ m_{end}, \ C)
 \end{align*}
-
 The result of this formalization is a a set of traces that contain statements
 where the string \bsq{error} occurs, which a developer may use to help answer
 their orignal question.
@@ -130,21 +128,30 @@ question that is often asked after a refactor.
 Assuming ``correct" in the context of refactoring to mean that there are no
 functional changes to business logic, the resulting formalization of the
 previous question might be:
-
 \begin{align*}
-  compare(TR_{pre}, TR_{post})
+  compare(TR_{pre}, \ TR_{post})
 \end{align*}
-
 Where $TR_{pre}$ is the set of traces from the program prior to the refactor,
 while $TR_{post}$ is the set of traces from the program after the refactor.
-The result of this formalization would be $TR_{common}, TR_1,$ and $TR_2$.
-
-TODO: continue this train of thought
+Using $TR_{pre}$ as a ground truth, the developer might inspect the ouputs
+of the formalization: $T_{common}, T_1,$ and $T_2$, and draw conclusions
+regarding the correctness of the refactor.
 
 \section{Answering Reachability Questions}
 \label{sec:AnsweringReachabilityQuestions}
 
-TODO: preamble
+A fundamental question that developers often ask during software evolution
+tasks is: ``what is relevant?" \cite{sillito-2008-asking-and-answering}.
+Tools that provide support for developer tasks such as structural search tools
+or call graphs often present an incredible amount of information that may not
+necessarily be relevant to a task.
+This introduces friction between the developer and their tooling, which in
+turn may negatively impact the developer's perceived utility of the tools
+that are available to them, no matter how useful they may actually be.
+
+% Say a little bit about how tools exist already that help answer reach q.
+% The problem isn't the lack of tooling, the problem is the lack of having
+% useful information about the task at hand.
 
 \subsection{Low-level Support for Reachability Questions}
 \label{subsec:LowLevelSupportReachabilityQuestions}
