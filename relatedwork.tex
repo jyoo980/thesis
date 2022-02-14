@@ -160,7 +160,25 @@ slicing mechanism (Figure \ref{fig:IntelliJDataflow}) that produces  a set of
 data-flow traces (Figure \ref{fig:IntelliJDataflowResult}).
 
 \par Although the information produced by mechanisms such as general-purpose
-slicing and data-flow analysis may be complete and useful, 
+slicing and data-flow analysis may be complete and useful, it is difficult
+to determine their usability by developers.
+The data-flow traces produced by the data-flow analysis tool are presented in a 
+very space-efficient manner.
+This enables the presentation of a large number of results in a compact space.
+However, since each row in the output represents a single line of code, it may 
+be difficult for developers to understand it with the lack of surrounding
+context.
+For example, line 200 from Figure \ref{fig:IntelliJDataflowResult} contains the
+statement:
+\begin{align*}
+  % TODO: fix the formatting of this, looks very ugly.
+  \texttt{alphaField.document = alphaHexDocument}
+\end{align*}
+The only information a developer is able to obtain from this statement is that
+the \texttt{document} field of the \texttt{alphaField} object was assigned
+the value of \texttt{alphaHexDocument}.
+It is not possible to obtain more information about the values in the statement
+without additional context.
 
 % TODO: blah blah they may not be usable/intuitive etc...
 
@@ -181,7 +199,7 @@ slicing and data-flow analysis may be complete and useful,
 \includegraphics[width=\textwidth]{./figs/intellij-dataflow-result.png}
 \caption{
   The output of invoking a ``Dataflow to here..." analysis on \texttt{doc}
-  (Figure \ref{fig:IntelliJDataflow}). Each line represents an assignment
+  (Figure \ref{fig:IntelliJDataflow}). Each row represents an assignment
   operation to \texttt{doc}. Information such as the line of code, and 
   enclosing method are displayed.
 }
