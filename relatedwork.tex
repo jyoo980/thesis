@@ -123,8 +123,8 @@ of the outputs of the \textit{compare} question: $TR_{common}$.
 The tuples in $tr_a$ and $tr_b$ for which no match is found are collected into
 the outputs $TR_1$ and $TR_2$.
 A developer may ask a \textit{compare} question as they refactor code.
-``Is this code correct"? \cite{latoza-2010-hard-questions}. Is a common
-question that is often asked after a refactor.
+``Is this code correct?" \cite{latoza-2010-hard-questions} is a common
+question that is often asked.
 Assuming ``correct" in the context of refactoring to mean that there are no
 functional changes to business logic, the resulting formalization of the
 previous question might be:
@@ -140,27 +140,57 @@ regarding the correctness of the refactor.
 \section{Answering Reachability Questions}
 \label{sec:AnsweringReachabilityQuestions}
 
-A fundamental question that developers often ask during software evolution
-tasks is: ``what is relevant?" \cite{sillito-2008-asking-and-answering}.
-Tools that provide support for developer tasks such as structural search tools
-or call graphs often present an incredible amount of information that may not
-necessarily be relevant to a task.
-This introduces friction between the developer and their tooling, which in
-turn may negatively impact the developer's perceived utility of the tools
-that are available to them, no matter how useful they may actually be.
-
-% Say a little bit about how tools exist already that help answer reach q.
-% The problem isn't the lack of tooling, the problem is the lack of having
-% useful information about the task at hand.
+\acp{IDE} such as IntelliJ IDEA and Visual Studio include tools that developers 
+might adopt in answering reachability questions, even if they were not designed
+for that purpose.
+For example, a developer might generate a call graph for a set of methods in a
+class, and manually traverse it to trace or collect items of interest.
+Although a number of built-in tools could be adopted in helping developers
+answer reachability questions, it is also suggested that developers could 
+perform coding tasks more quickly and accurately with tools that more directly 
+support answering reachability questions \cite{latoza-2010-reach}.
 
 \subsection{Low-level Support for Reachability Questions}
 \label{subsec:LowLevelSupportReachabilityQuestions}
 
-TODO: talk about slicing/traces/how IDEs already support reachability q, but
-aren't super helpful (in terms of how they visualize data).
+A common reachability question that developers might ask is: ``where does this
+value come from?"
+To answer this type of question, a developer could invoke a general-purpose
+slicing mechanism (Figure \ref{fig:IntelliJDataflow}) that produces  a set of 
+data-flow traces (Figure \ref{fig:IntelliJDataflowResult}).
 
-\section{Tools that Support Developer Questions}
-\label{sec:ToolsSupportDeveloperQuestions}
+\par Although the information produced by mechanisms such as general-purpose
+slicing and data-flow analysis may be complete and useful, 
+
+% TODO: blah blah they may not be usable/intuitive etc...
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{./figs/intellij-dataflow.png}
+\caption{
+  A data-flow analysis workflow in IntelliJ IDEA. (A) is the value of
+  interest, \texttt{doc}. (B) exposes the variety of analyses that are
+  available to developers for \texttt{doc}. (C) invokes a data-flow analysis
+  of values that flow into \texttt{doc}.
+}
+\label{fig:IntelliJDataflow}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{./figs/intellij-dataflow-result.png}
+\caption{
+  The output of invoking a ``Dataflow to here..." analysis on \texttt{doc}
+  (Figure \ref{fig:IntelliJDataflow}). Each line represents an assignment
+  operation to \texttt{doc}. Information such as the line of code, and 
+  enclosing method are displayed.
+}
+\label{fig:IntelliJDataflowResult}
+\end{figure}
+% TODO: this isn't a question that requires specialized/high-level support
+
+\section{Tools that Support Reachability Questions}
+\label{sec:ToolsSupportReachabilityQuestions}
 
 \noindent Tools today employ both dynamic and static approaches to gathering
 program information for developers.
