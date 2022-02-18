@@ -12,9 +12,8 @@
 \end{epigraph}
 
 \noindent Researchers have investigated both the questions that developers ask 
-as they understand and evolve their systems, and the efficacy of tools 
-that support developers in answering their questions during software change 
-tasks.
+as they understand and evolve their systems, and proposed tools that support 
+developers in answering their questions during software change tasks.
 
 \par Developers find it challenging to understand code in modern codebases for
 a number of reasons.
@@ -121,7 +120,8 @@ $\langle s_a, env_a\rangle \in tr_a$ to $\langle s_b, env_b \rangle \in tr_b$.
 Each matching tuple is coalesced into traces $tr_{common}$, that form one
 of the outputs of the \textit{compare} question: $TR_{common}$.
 The tuples in $tr_a$ and $tr_b$ for which no match is found are collected into
-the outputs $TR_1$ and $TR_2$.
+the outputs $TR_1$ and $TR_2$, which represent tuples that were found to be 
+unique to $TR_a$ and $TR_b$, respectively.
 A developer may ask a \textit{compare} question as they refactor code.
 ``Is this code correct?" \cite{latoza-2010-hard-questions} is a common
 question that is often asked.
@@ -212,20 +212,21 @@ without additional context.
 
 \noindent Tools today employ both dynamic and static approaches to gathering
 program information for developers.
-The Whyline analyzes runtime information gathered from an offline dynamic
-analysis of an execution trace to generate a set of question and answer pairs
-that are presented to developers \cite{ko-2004-whyline}.
-GetMeHere developed at Microsoft Research leverages static analysis by
-translating high-level developer questions into low-level program verification 
-problems that are dispatched to an \ac{SMT} solver \cite{barnett-2014-get}, 
+For example the Whyline analyzes runtime information gathered from an offline 
+dynamic analysis of an execution trace to generate a set of question and answer 
+pairs that are presented to developers \cite{ko-2004-whyline}.
+As another example, GetMeHere, developed at Microsoft Research, leverages static 
+analysis by translating high-level developer questions into low-level program 
+verification problems that are dispatched to an \ac{SMT} solver \cite{barnett-2014-get}, 
 removing the need for developers to run their programs to analyze them.
 
 \subsection{The Whyline}
 \label{subsec:TheWhyline}
 
 \par The Whyline was initially developed as an interrogative debugging interface
-for the Alice programming language. Later, the Java Whyline was developed to 
-support the Java programming language and the needs of professional developers.
+for the Alice programming language. Later, the Java Whyline \cite{ko-2009-java-whyline}
+was developed to support the Java programming language and the needs of 
+professional developers.
 At a high-level, the Whyline enables developers to select questions about a
 program's output, and it then helps developers to work back from from the 
 selected output to its causes \cite{ko-2009-java-whyline}.
@@ -245,7 +246,7 @@ output of programs has benefits, as it avoids speculation about the causes of
 a failure, and simplifies the exploration of code responsible for the output
 \cite{ko-2009-java-whyline}.
 An experiment was conducted to evaluate the efficacy of the Whyline on 
-isolating the causes of two bug reports from an open source project.
+isolating the causes of two bug reports from an open source project \cite{2009-ko-java-whyline}.
 It was found that the Whyline users were successful about three times as often
 and about twice as fast compared to the control group who used conventional
 debugging tools and techniques.
@@ -289,7 +290,7 @@ execute the code.
 GetMeHere is also presented as a general query engine, where developers can
 specify a slice in a program, and execute queries that represent reachability
 questions over the given slice \cite{barnett-2014-get}.
-The flexibility afforded by GetMeHere enables to developers to fine-tune their
+The flexibility afforded by GetMeHere enables developers to fine-tune their
 queries, but may introduce some of the speculation about program failures or
 erroneous behaviour that the Whyline attempts to minimize.
 GetMeHere was evaluated on three benchmark programs, all written in C\#.
