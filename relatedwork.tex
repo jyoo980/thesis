@@ -30,7 +30,7 @@ scale, but Google's codebase helps to contextualize the challenges that
 developers may face in understanding the systems they wrangle each day.
 The size, complexity, and indirection that is becoming commonplace in systems
 today \cite{latoza-2010-reach} are pushing the already-elusive goal of
-enabling developers to more easily enderstand their code into new and 
+enabling developers to more easily understand their code into new and 
 uncharted territories.
 
 \section{Questions that Developers Ask}
@@ -108,7 +108,7 @@ The resulting formalization is:
 \end{align*}
 The result of this formalization is a a set of traces that contain statements
 where the string \bsq{error} occurs, which a developer may use to help answer
-their orignal question.
+their original question.
 
 \par A \textit{compare} question requires the analysis of two concrete traces, 
 and is of the form \compareq{}. 
@@ -133,7 +133,7 @@ previous question might be:
 \end{align*}
 Where $TR_{pre}$ is the set of traces from the program prior to the refactor,
 while $TR_{post}$ is the set of traces from the program after the refactor.
-Using $TR_{pre}$ as a ground truth, the developer might inspect the ouputs
+Using $TR_{pre}$ as a ground truth, the developer might inspect the outputs
 of the formalization: $T_{common}, T_1,$ and $T_2$, and draw conclusions
 regarding the correctness of the refactor.
 
@@ -223,7 +223,7 @@ removing the need for developers to run their programs to analyze them.
 \subsection{The Whyline}
 \label{subsec:TheWhyline}
 
-\par The Whyline was initially developed as an interogative debugging interface
+\par The Whyline was initially developed as an interrogative debugging interface
 for the Alice programming language. Later, the Java Whyline was developed to 
 support the Java programming language and the needs of professional developers.
 At a high-level, the Whyline enables developers to select questions about a
@@ -237,11 +237,11 @@ A developer could choose to investigate the cause of this erroneous program
 behaviour by running the program, opening the Whyline window and selecting
 ``why did \texttt{foo} $=$ \texttt{v}?" and a \emph{temporal context}, which is
 a specified time-frame that they wish to investigate.
-The Whyline then presents a view of all statments of the program within the
+The Whyline then presents a view of all statements of the program within the
 temporal context that contributed to the line where \texttt{foo} has the value
 \texttt{x}. 
 The Whyline's approach of presenting a pre-defined subset of questions about the 
-output of programs has benfits, as it avoids speculation about the causes of
+output of programs has benefits, as it avoids speculation about the causes of
 a failure, and simplifies the exploration of code responsible for the output
 \cite{ko-2009-java-whyline}.
 An experiment was conducted to evaluate the efficacy of the Whyline on 
@@ -311,7 +311,7 @@ for their questions during development tasks, even with the tooling available
 to them.
 This appears to be in part due to the inevitability of imperfect mappings from
 high-level developer questions to the low-level analysis facilities afforded
-by prograam comprehension tools.
+by program comprehension tools.
 In fact, a study of industrial programmers [sic] by Sillito et al. showed that 
 participants often struggled to refine and map their questions to tools
 that could be used to answer them \cite{sillito-2006-questions-during-task}.
@@ -331,7 +331,7 @@ difficulty of understanding the existing code and the consequences of their
 changes \cite{roehm-2012-comprehend-software}.
 Developers may also choose to abandon the use of purpose-built program
 comprehension tools altogether.
-In the same study conducted by Roehm et al., 22 deveopers used an IDE
+In the same study conducted by Roehm et al., 22 developers used an IDE
 for development and comprehension tasks.
 However, none were observed making use of the IDE's built-in program 
 comprehension features, such as visualization and concept localization
