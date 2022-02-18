@@ -60,9 +60,12 @@ the control-flow or the data-flow through a program, such as
 ``what parts of this data structure are being accessed in this code?" 
 \cite{sillito-2006-questions-during-task}.
 
+\subsection{Reachability Questions}
+\label{subsec:ReachabilityQuestions}
+
 \par Researchers have conducted studies that investigate both the 
-frequency and difficulty of focused questions that developers ask during 
-change tasks.
+frequency and difficulty of answering some of the focused questions that 
+developers ask during change tasks.
 LaToza et al. found that a significant portion of a developer's work involves 
 answering reachability questions.
 A reachability question is a search across feasible paths through a program for 
@@ -76,25 +79,153 @@ reachability questions as at least somewhat hard to answer.
 Not only are reachability questions difficult to answer, but the process of
 investigating them is also time-consuming.
 A field study of 17 developers found that of the 10 longest activities
-undertaken by devevlopers, 9 were associated with reachability questions
+undertaken by developers, 9 were associated with reachability questions
 \cite{latoza-2010-reach}.
 
-\section{Tools that Support Developer Questions}
-\label{sec:ToolsSupportDeveloperQuestions}
+\noindent LaToza et al. formalized two types of reachability questions, named
+\textit{find} and \textit{compare} \cite{latoza-2010-reach}.
+A \textit{find} question is of the form \findq{}; where \textit{SC} and
+\textit{TR} are variable parameters.
+\textit{TR} represents a set of concrete program traces, where each trace 
+\textit{tr} is a list of tuples $\langle s, env \rangle$. 
+In each tuple, $s$ is a statement, and $env$ maps each variable in $s$ to a
+value.
+\textit{SC} represents search criteria that acts a a function that prunes the
+set of traces \textit{TR} to a subset that is relevant to the reachability
+question being asked.
+As an example of a \textit{find} question, a developer may ask: ``where does
+the string \bsq{error} come up in the control-flow of this method called 
+\texttt{openConnection}?"
+To formalize this into a \textit{find} question, we define \textit{SC} as
+$grep(`error\textrm')$, and \textit{TR} as 
+$trace(p, \ m_{start}, \ m_{end}, \ C)$, where $p$ is the entire program under
+inspection, $m_{start}$ and $m_{end}$ represent the start and end of the
+control-flow of the method \texttt{openConnection}, and $C$ is a filtering
+constraint that is left unspecified.
+The resulting formalization is:
+\begin{align*}
+  find \ grep(`error\textrm') \ in \ trace(p, \ m_{start}, \ m_{end}, \ C)
+\end{align*}
+The result of this formalization is a a set of traces that contain statements
+where the string \bsq{error} occurs, which a developer may use to help answer
+their orignal question.
 
-\noindent Different approaches have been taken to building tools 
-that enable developers to answer questions about their code.
-Some tools such as the Whyline present a more passive approach,
-presenting developers with a subset of pre-defined questions and answers 
-they may choose to investigate after runtime \cite{ko-2004-whyline}.
-Other tools present a more active approach; GetMeHere developed
-at Microsoft Research enables developers to form their own queries about
-the behaviour of their programs, and provides answers to them without needing
-an explicit execution trace \cite{barnett-2014-get}.
+\par A \textit{compare} question requires the analysis of two concrete traces, 
+and is of the form \compareq{}. 
+First, an attempt is made to match each trace $tr_a \in TR_a$ to a trace 
+$tr_b \in TR_b$.
+The result of this operation may be represented as a list of tuples 
+$\langle tr_a, tr_b \rangle$.
+For each tuple in the resulting list, \textit{compare} attempts to match 
+$\langle s_a, env_a\rangle \in tr_a$ to $\langle s_b, env_b \rangle \in tr_b$.
+Each matching tuple is coalesced into traces $tr_{common}$, that form one
+of the outputs of the \textit{compare} question: $TR_{common}$.
+The tuples in $tr_a$ and $tr_b$ for which no match is found are collected into
+the outputs $TR_1$ and $TR_2$.
+A developer may ask a \textit{compare} question as they refactor code.
+``Is this code correct?" \cite{latoza-2010-hard-questions} is a common
+question that is often asked.
+Assuming ``correct" in the context of refactoring to mean that there are no
+functional changes to business logic, the resulting formalization of the
+previous question might be:
+\begin{align*}
+  compare(TR_{pre}, \ TR_{post})
+\end{align*}
+Where $TR_{pre}$ is the set of traces from the program prior to the refactor,
+while $TR_{post}$ is the set of traces from the program after the refactor.
+Using $TR_{pre}$ as a ground truth, the developer might inspect the ouputs
+of the formalization: $T_{common}, T_1,$ and $T_2$, and draw conclusions
+regarding the correctness of the refactor.
+
+\section{Answering Reachability Questions}
+\label{sec:AnsweringReachabilityQuestions}
+
+\acp{IDE} such as IntelliJ IDEA and Visual Studio include tools that developers 
+might adopt in answering reachability questions, even if they were not designed
+for that purpose.
+For example, a developer might generate a call graph for a set of methods in a
+class, and manually traverse it to trace or collect items of interest.
+Although a number of built-in tools could be adopted in helping developers
+answer reachability questions, it is also suggested that developers could 
+perform coding tasks more quickly and accurately with tools that more directly 
+support answering reachability questions \cite{latoza-2010-reach}.
+
+\subsection{Low-level Support for Reachability Questions}
+\label{subsec:LowLevelSupportReachabilityQuestions}
+
+A common reachability question that developers might ask is: ``where does this
+value come from?"
+To answer this type of question, a developer could invoke a general-purpose
+slicing mechanism (Figure \ref{fig:IntelliJDataflow}) that produces  a set of 
+data-flow traces (Figure \ref{fig:IntelliJDataflowResult}).
+
+\par Although the information produced by mechanisms such as general-purpose
+slicing and data-flow analysis may be complete and useful, it is difficult
+to determine their usability by developers.
+The data-flow traces produced by the data-flow analysis tool are presented in a 
+very space-efficient manner.
+This enables the presentation of a large number of results in a compact space.
+However, since each row in the output represents a single line of code, it may 
+be difficult for developers to understand it with the lack of surrounding
+context.
+For example, line 200 from Figure \ref{fig:IntelliJDataflowResult} contains the
+statement:
+\begin{align*}
+  % TODO: fix the formatting of this, looks very ugly.
+  \texttt{alphaField.document = alphaHexDocument}
+\end{align*}
+The only information a developer is able to obtain from this statement is that
+the \texttt{document} field of the \texttt{alphaField} object was assigned
+the value of \texttt{alphaHexDocument}.
+It is not possible to obtain more information about the values in the statement
+without additional context.
+
+% TODO: blah blah they may not be usable/intuitive etc...
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{./figs/intellij-dataflow.png}
+\caption{
+  A data-flow analysis workflow in IntelliJ IDEA. (A) is the value of
+  interest, \texttt{doc}. (B) exposes the variety of analyses that are
+  available to developers for \texttt{doc}. (C) invokes a data-flow analysis
+  of values that flow into \texttt{doc}.
+}
+\label{fig:IntelliJDataflow}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{./figs/intellij-dataflow-result.png}
+\caption{
+  The output of invoking a ``Dataflow to here..." analysis on \texttt{doc}
+  (Figure \ref{fig:IntelliJDataflow}). Each row represents an assignment
+  operation to \texttt{doc}. Information such as the line of code, and 
+  enclosing method are displayed.
+}
+\label{fig:IntelliJDataflowResult}
+\end{figure}
+% TODO: this isn't a question that requires specialized/high-level support
+
+\section{Tools that Support Reachability Questions}
+\label{sec:ToolsSupportReachabilityQuestions}
+
+\noindent Tools today employ both dynamic and static approaches to gathering
+program information for developers.
+The Whyline analyzes runtime information gathered from an offline dynamic
+analysis of an execution trace to generate a set of question and answer pairs
+that are presented to developers \cite{ko-2004-whyline}.
+GetMeHere developed at Microsoft Research leverages static analysis by
+translating high-level developer questions into low-level program verification 
+problems that are dispatched to an \ac{SMT} solver \cite{barnett-2014-get}, 
+removing the need for developers to run their programs to analyze them.
+
+\subsection{The Whyline}
+\label{subsec:TheWhyline}
 
 \par The Whyline was initially developed as an interogative debugging interface
-for the Alice programming language, and later augmented to support the Java
-programming language and the needs of professional developers.
+for the Alice programming language. Later, the Java Whyline was developed to 
+support the Java programming language and the needs of professional developers.
 At a high-level, the Whyline enables developers to select questions about a
 program's output, and it then helps developers to work back from from the 
 selected output to its causes \cite{ko-2009-java-whyline}.
@@ -104,8 +235,8 @@ For example, consider a case when a variable \texttt{foo} is being erroneously
 set to some value \texttt{v}.
 A developer could choose to investigate the cause of this erroneous program
 behaviour by running the program, opening the Whyline window and selecting
-``why did \texttt{foo} $=$ \texttt{v}?" and a \emph{temporal context}, which is 
- a specified time-frame that they wish to investigate.
+``why did \texttt{foo} $=$ \texttt{v}?" and a \emph{temporal context}, which is
+a specified time-frame that they wish to investigate.
 The Whyline then presents a view of all statments of the program within the
 temporal context that contributed to the line where \texttt{foo} has the value
 \texttt{x}. 
@@ -119,10 +250,39 @@ It was found that the Whyline users were successful about three times as often
 and about twice as fast compared to the control group who used conventional
 debugging tools and techniques.
 
-\par Other tools encourage the developer to take a more active approach in
-formulating questions about programs and their behaviour.
-Similar to the Whyline, GetMeHere enables developers to select a line of code 
-as a point of interest and visualize the execution that reaches the given point.
+\par Although the Whyline was designed as a stand-alone tool, it presents an 
+interface to a developer that resembles those of commonly used \acp{IDE} such
+as Microsoft Visual Studio, IntelliJ IDEA, and Eclipse.
+Figure \ref{fig:WhylineQuestion} shows the Whyline interface as it is used
+to investigate the output of a \ac{GUI} application.
+Developers are able to choose a question from the dropdown menu that appears
+next to some observable program output.
+The Whyline then presents a view that traces the execution of the program
+to the specific lines that have an effect on the output under investigation.
+This view is presented in Figure \ref{fig:WhylineTrace},
+where an editor-like view shows two lines of code in different source files
+that affect program output.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{./figs/whyline-question-interface.png}
+\caption{The interrogative debugging interface presented by Whyline.}
+\label{fig:WhylineQuestion}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{./figs/whyline-trace-back.png}
+\caption{The high-level program trace presented by Whyline.}
+\label{fig:WhylineTrace}
+\end{figure}
+
+\subsection{GetMeHere}
+\label{subsec:GetMeHere}
+
+\par Similar to the Whyline, GetMeHere enables developers to select a line of 
+code as a point of interest and visualize the execution that reaches the given 
+point.
 Where it differs, however, is in how it is able to generate this execution
 by using an SMT-based static analysis \cite{barnett-2014-get} without having to
 execute the code.
@@ -135,6 +295,13 @@ erroneous behaviour that the Whyline attempts to minimize.
 GetMeHere was evaluated on three benchmark programs, all written in C\#.
 The sizes of the benchmark programs ranged from 650 to $11,000$ lines of code,
 which is relatively small by modern standards.
+
+\par Unlike the Whyline, GetMeHere was built as an extension to the Visual
+Studio \ac{IDE}, and not as a standalone application.
+GetMeHere displays an execution trace using the Microsoft Debugger Canvas 
+\cite{bragdon-2012-canvas}, an industrial implementation of the earlier 
+Code Bubbles \cite{bragdon-2010-code-bubbles} paradigm for Visual Studio
+\cite{barnett-2014-get}.
 
 \section{How Developers Use Tools to Understand Programs}
 \label{sec:HowDevelopersUseToolsToUnderstandPrograms}
@@ -181,7 +348,7 @@ support on-the-fly queries.
 GetMeHere attempts to bypass the need for an execution trace and provide support
 for on-demand queries by translating high-level developer questions into SMT
 instances. 
-Although the results presented by Barnett et al. is promising, the
+Although the results presented by Barnett et al. are promising, the
 relatively small size of the systems GetMeHere was evaluated on leaves more to
 be investigated about the scalability of their approach.
 
