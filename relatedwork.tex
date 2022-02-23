@@ -292,9 +292,18 @@ execute the code.
 GetMeHere is also presented as a general query engine, where developers can
 specify a slice in a program, and execute queries that represent reachability
 questions over the given slice \cite{barnett-2014-get}.
-The flexibility afforded by GetMeHere enables developers to fine-tune their
-queries, but may introduce some of the speculation about program failures or
-erroneous behaviour that the Whyline attempts to minimize.
+The flexibility afforded by GetMeHere enables developers to write queries that 
+are highly-parameterizable and specific to the line of investigation they have
+chosen to pursue in localizing a defect or understanding a program.
+However, with this flexibility comes a danger of enabling program comprehension
+or defect localization tasks that may be ultimately unfruitful.
+For example, a query that a developer writes to investigate a erroneous value
+assignment to a variable might have the possibility of producing results that 
+are entirely unrelated to the defect.
+The Whyline mitigates these possibilities by presenting a set of questions
+and results that are directly formed from an execution trace of a program, and
+filtered to include statements and expressions that have dependencies on the
+value or object under investigation.
 GetMeHere was evaluated on three benchmark programs, all written in C\#.
 The sizes of the benchmark programs ranged from 650 to $11,000$ lines of code,
 which is relatively small by modern standards.
