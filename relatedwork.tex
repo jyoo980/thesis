@@ -163,8 +163,9 @@ data-flow traces (Figure \ref{fig:IntelliJDataflowResult}).
 slicing and data-flow analysis may be complete and useful, it is difficult
 to determine their usability by developers.
 The data-flow traces produced by the data-flow analysis tool are presented in a 
-very space-efficient manner.
-This enables the presentation of a large number of results in a compact space.
+very compact view.
+This view enables the presentation of a large number of results that does not 
+require an equally large amount of visual space.
 However, since each row in the output represents a single line of code, it may 
 be difficult for developers to understand it with the lack of surrounding
 context.
@@ -178,9 +179,10 @@ The only information a developer is able to obtain from this statement is that
 the \texttt{document} field of the \texttt{alphaField} object was assigned
 the value of \texttt{alphaHexDocument}.
 It is not possible to obtain more information about the values in the statement
-without additional context.
-
-% TODO: blah blah they may not be usable/intuitive etc...
+without additional context, which might comprise information useful to 
+developers, such as where or how values in a method were assigned, inline 
+comments regarding the source code, or even the general structure of the code
+that surrounds the statement of interest.
 
 \begin{figure}[ht]
 \centering
@@ -212,7 +214,7 @@ without additional context.
 
 \noindent Tools today employ both dynamic and static approaches to gathering
 program information for developers.
-For example the Whyline analyzes runtime information gathered from an offline 
+For example, the Whyline analyzes runtime information gathered from an offline 
 dynamic analysis of an execution trace to generate a set of question and answer 
 pairs that are presented to developers \cite{ko-2004-whyline}.
 As another example, GetMeHere, developed at Microsoft Research, leverages static 
@@ -246,7 +248,7 @@ output of programs has benefits, as it avoids speculation about the causes of
 a failure, and simplifies the exploration of code responsible for the output
 \cite{ko-2009-java-whyline}.
 An experiment was conducted to evaluate the efficacy of the Whyline on 
-isolating the causes of two bug reports from an open source project \cite{2009-ko-java-whyline}.
+isolating the causes of two bug reports from an open source project \cite{ko-2009-java-whyline}.
 It was found that the Whyline users were successful about three times as often
 and about twice as fast compared to the control group who used conventional
 debugging tools and techniques.
@@ -310,9 +312,9 @@ Code Bubbles \cite{bragdon-2010-code-bubbles} paradigm for Visual Studio
 \noindent In practice, developers still face difficulties in finding answers 
 for their questions during development tasks, even with the tooling available 
 to them.
-This appears to be in part due to the inevitability of imperfect mappings from
-high-level developer questions to the low-level analysis facilities afforded
-by program comprehension tools.
+These difficulties appear to be in part due to the inevitability of imperfect 
+mappings from high-level developer questions to the low-level analysis 
+facilities afforded by program comprehension tools.
 In fact, a study of industrial programmers [sic] by Sillito et al. showed that 
 participants often struggled to refine and map their questions to tools
 that could be used to answer them \cite{sillito-2006-questions-during-task}.
@@ -349,9 +351,10 @@ support on-the-fly queries.
 GetMeHere attempts to bypass the need for an execution trace and provide support
 for on-demand queries by translating high-level developer questions into SMT
 instances. 
-Although the results presented by Barnett et al. are promising, the
-relatively small size of the systems GetMeHere was evaluated on leaves more to
-be investigated about the scalability of their approach.
+Although the results presented by Barnett et al. are promising
+\cite{barnett-2014-get}, the relatively small size of the systems GetMeHere was 
+evaluated on leaves more to be investigated about the scalability of their 
+approach.
 
 \endinput
 
