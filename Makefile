@@ -36,7 +36,7 @@ clean:
 	$(RM) ${BUILTPDFFIGURES} $(NAME1).aux $(NAME1).dvi \
 	    $(NAME1).log $(NAME1).blg $(NAME1).bbl $(NAME1).out \
 	    $(NAME1).toc $(NAME1).lof $(NAME1).lot $(NAME1).brf \
-            *.aux
+            *.aux *.bak
 
 # configuration issues
 .SUFFIXES: .tex .pdf .bbl
