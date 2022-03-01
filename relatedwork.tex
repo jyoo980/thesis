@@ -346,45 +346,45 @@ difficulty of understanding the existing code and the consequences of their
 changes \cite{roehm-2012-comprehend-software}.
 Developers may also choose to abandon the use of purpose-built program
 comprehension tools altogether.
-In the same study conducted by Roehm et al., 22 developers used an IDE
+In the same study conducted by Roehm et al., 22 developers used an \ac{IDE}
 for development and comprehension tasks.
-However, none were observed making use of the IDE's built-in program 
-comprehension features, such as visualization and concept localization
-\cite{roehm-2012-comprehend-software}.
+However, none were observed making use of the \ac{IDE}'s built-in program 
+comprehension features, such as call-graph visualization and concept 
+localization \cite{roehm-2012-comprehend-software}.
 
 \subsection{Tool Discovery}
 \label{subsec:ToolDiscovery}
 
-Despite the large amount of software tooling available to developers,
-it is often the case that they often only use a small subset of the 
+Despite the vast amount of software tooling available to developers,
+it is often the case that they only use a small subset of the 
 commands offered by modern development environments, reducing their overall 
 development fluency \cite{murphy-hill-2012-recommend}.
 The difficulty in making developers aware of the tools available in their
 \acp{IDE} might be related to the general challenge of making end-users aware
 of features in software, independent of a specific domain.
-For example, a common problem that users faced in a study that examined the
-learnability of a software program was that users were not aware of a specific
+For example, a common problem faced by users in a study that examined the
+learnability of a software program was they were not aware of a specific
 tool or operation which was available for use \cite{grossman-2009-soft-learn}.
+This might suggest that the lack of discoverability of software tooling and 
+features is a barrier to their wider integration into development workflows.
 
-% 
-% \par Developers spend a significant portion of the day attempting to answer
-% questions about their code.
-% Although there are specialized tools that exist to aid developers in this task,
-% they are not without their limitations. 
-% The Whyline represents a promising approach in enabling developers to answer 
-% questions about the runtime behaviour of their code.
-% However, it only enables a retrospective analysis of a program, and does not 
-% support on-the-fly queries.
-% GetMeHere attempts to bypass the need for an execution trace and provide support
-% for on-demand queries by translating high-level developer questions into SMT
-% instances. 
-% Although the results presented by Barnett et al. are promising
-% \cite{barnett-2014-get}, the relatively small size of the systems GetMeHere was 
-% evaluated on leaves more to be investigated about the scalability of their 
-% approach.
+\par Improving the discoverability of software tools and features has been
+the subject of a multi-pronged approach by researchers.
+For example, some recommendation systems such as \textit{Spyglass} might
+analyze common usage patterns displayed by developers in their \acp{IDE}
+to recommend features and tools that may improve their efficiency
+\cite{murphy-2009-spyglass}.
+Other tools may rely on a context-based approach to recommending tools and
+features. As an example, some refactoring tools in \acp{IDE} consider
+contextual information such as caret or cursor location, text selection, or
+background analysis of code smells to highlight instances where powerful but
+perhaps less well-known refactorings are available
+\cite{campbell-2008-refactoring-tools}.
+Communal and crowd-sourced knowledge may also be a source of information that
+tools leverage to improve tool discoverability. \textit{Toolbox} is an example
+of a tool that maintains a database of frequently-executed commands by users
+of a Unix system, and notifies the user community of commands that appear to be
+newly-discovered \cite{maltzahn-1995-toolbox}.
 
 \endinput
-
-TODO: add a paragraph about what my thesis attempts to contribute (in relation
-to the related work section).
 
