@@ -163,8 +163,9 @@ data-flow traces (Figure \ref{fig:IntelliJDataflowResult}).
 slicing and data-flow analysis may be complete and useful, it is difficult
 to determine their usability by developers.
 The data-flow traces produced by the data-flow analysis tool are presented in a 
-very space-efficient manner.
-This enables the presentation of a large number of results in a compact space.
+very compact view.
+This view enables the presentation of a large number of results that does not 
+require an equally large amount of visual space.
 However, since each row in the output represents a single line of code, it may 
 be difficult for developers to understand it with the lack of surrounding
 context.
@@ -178,9 +179,10 @@ The only information a developer is able to obtain from this statement is that
 the \texttt{document} field of the \texttt{alphaField} object was assigned
 the value of \texttt{alphaHexDocument}.
 It is not possible to obtain more information about the values in the statement
-without additional context.
-
-% TODO: blah blah they may not be usable/intuitive etc...
+without additional context, which might comprise information useful to 
+developers, such as where or how values in a method were assigned, inline 
+comments regarding the source code, or even the general structure of the code
+that surrounds the statement of interest.
 
 \begin{figure}[ht]
 \centering
@@ -212,7 +214,7 @@ without additional context.
 
 \noindent Tools today employ both dynamic and static approaches to gathering
 program information for developers.
-For example the Whyline analyzes runtime information gathered from an offline 
+For example, the Whyline analyzes runtime information gathered from an offline 
 dynamic analysis of an execution trace to generate a set of question and answer 
 pairs that are presented to developers \cite{ko-2004-whyline}.
 As another example, GetMeHere, developed at Microsoft Research, leverages static 
@@ -246,7 +248,7 @@ output of programs has benefits, as it avoids speculation about the causes of
 a failure, and simplifies the exploration of code responsible for the output
 \cite{ko-2009-java-whyline}.
 An experiment was conducted to evaluate the efficacy of the Whyline on 
-isolating the causes of two bug reports from an open source project \cite{2009-ko-java-whyline}.
+isolating the causes of two bug reports from an open source project \cite{ko-2009-java-whyline}.
 It was found that the Whyline users were successful about three times as often
 and about twice as fast compared to the control group who used conventional
 debugging tools and techniques.
@@ -290,9 +292,18 @@ execute the code.
 GetMeHere is also presented as a general query engine, where developers can
 specify a slice in a program, and execute queries that represent reachability
 questions over the given slice \cite{barnett-2014-get}.
-The flexibility afforded by GetMeHere enables developers to fine-tune their
-queries, but may introduce some of the speculation about program failures or
-erroneous behaviour that the Whyline attempts to minimize.
+The flexibility afforded by GetMeHere enables developers to write queries that 
+are highly-parameterizable and specific to the line of investigation they have
+chosen to pursue in localizing a defect or understanding a program.
+However, with this flexibility comes a danger of enabling program comprehension
+or defect localization tasks that may be ultimately unfruitful.
+For example, a query that a developer writes to investigate a erroneous value
+assignment to a variable might have the possibility of producing results that 
+are entirely unrelated to the defect.
+The Whyline mitigates these possibilities by presenting a set of questions
+and results that are directly formed from an execution trace of a program, and
+filtered to include statements and expressions that have dependencies on the
+value or object under investigation.
 GetMeHere was evaluated on three benchmark programs, all written in C\#.
 The sizes of the benchmark programs ranged from 650 to $11,000$ lines of code,
 which is relatively small by modern standards.
@@ -310,12 +321,15 @@ Code Bubbles \cite{bragdon-2010-code-bubbles} paradigm for Visual Studio
 \noindent In practice, developers still face difficulties in finding answers 
 for their questions during development tasks, even with the tooling available 
 to them.
-This appears to be in part due to the inevitability of imperfect mappings from
-high-level developer questions to the low-level analysis facilities afforded
-by program comprehension tools.
+These difficulties appear to be in part due to the inevitability of imperfect 
+mappings from high-level developer questions to the low-level analysis 
+facilities afforded by program comprehension tools.
 In fact, a study of industrial programmers [sic] by Sillito et al. showed that 
 participants often struggled to refine and map their questions to tools
 that could be used to answer them \cite{sillito-2006-questions-during-task}.
+
+\subsection{Tool Usability}
+\label{subsec:ToolUsability}
 
 \par The usability of software engineering tools may also be a significant
 factor on how developers use tools to help answer their questions.
@@ -332,29 +346,45 @@ difficulty of understanding the existing code and the consequences of their
 changes \cite{roehm-2012-comprehend-software}.
 Developers may also choose to abandon the use of purpose-built program
 comprehension tools altogether.
-In the same study conducted by Roehm et al., 22 developers used an IDE
+In the same study conducted by Roehm et al., 22 developers used an \ac{IDE}
 for development and comprehension tasks.
-However, none were observed making use of the IDE's built-in program 
-comprehension features, such as visualization and concept localization
-\cite{roehm-2012-comprehend-software}.
+However, none were observed making use of the \ac{IDE}'s built-in program 
+comprehension features, such as call-graph visualization and concept 
+localization \cite{roehm-2012-comprehend-software}.
 
-\par Developers spend a significant portion of the day attempting to answer
-questions about their code.
-Although there are specialized tools that exist to aid developers in this task,
-they are not without their limitations. 
-The Whyline represents a promising approach in enabling developers to answer 
-questions about the runtime behaviour of their code.
-However, it only enables a retrospective analysis of a program, and does not 
-support on-the-fly queries.
-GetMeHere attempts to bypass the need for an execution trace and provide support
-for on-demand queries by translating high-level developer questions into SMT
-instances. 
-Although the results presented by Barnett et al. are promising, the
-relatively small size of the systems GetMeHere was evaluated on leaves more to
-be investigated about the scalability of their approach.
+\subsection{Tool Discovery}
+\label{subsec:ToolDiscovery}
+
+Despite the vast amount of software tooling available to developers,
+it is often the case that they only use a small subset of the 
+commands offered by modern development environments, reducing their overall 
+development fluency \cite{murphy-hill-2012-recommend}.
+The difficulty in making developers aware of the tools available in their
+\acp{IDE} might be related to the general challenge of making end-users aware
+of features in software, independent of a specific domain.
+For example, a common problem faced by users in a study that examined the
+learnability of a software program was they were not aware of a specific
+tool or operation which was available for use \cite{grossman-2009-soft-learn}.
+This might suggest that the lack of discoverability of software tooling and 
+features is a barrier to their wider integration into development workflows.
+
+\par Improving the discoverability of software tools and features has been
+the subject of a multi-pronged approach by researchers.
+For example, some recommendation systems such as \textit{Spyglass} might
+analyze common usage patterns displayed by developers in their \acp{IDE}
+to recommend features and tools that may improve their efficiency
+\cite{murphy-2009-spyglass}.
+Other tools may rely on a context-based approach to recommending tools and
+features. As an example, some refactoring tools in \acp{IDE} consider
+contextual information such as caret or cursor location, text selection, or
+background analysis of code smells to highlight instances where powerful but
+perhaps less well-known refactorings are available
+\cite{campbell-2008-refactoring-tools}.
+Communal and crowd-sourced knowledge may also be a source of information that
+tools leverage to improve tool discoverability. \textit{Toolbox} is an example
+of a tool that maintains a database of frequently-executed commands by users
+of a Unix system, and notifies the user community of commands that appear to be
+newly-discovered \cite{maltzahn-1995-toolbox}.
 
 \endinput
-
-TODO: add a paragraph about what my thesis attempts to contribute (in relation
-to the related work section).
 
