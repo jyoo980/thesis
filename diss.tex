@@ -41,6 +41,25 @@
 % Utility commands
 \newcommand\printpcnt[2]{\the\numexpr#1*100/#2\%}
 
+
+% Commands to make reachability questions easier to format
+\usepackage{xspace}
+\newcommand{\findq}{
+  \textit{find SC in TR}\xspace
+}
+\newcommand{\compareq}{
+  \textit{compare($TR_a, \ TR_b$): $TR_{common}, TR_1, TR_2$}
+}
+
+% Util for placing a string between single quotes.
+\newcommand{\bsq}[1]{
+  \lq{#1}\rq\xspace
+}
+
+% Break up hyphenated stuff neatly.
+\usepackage[htt]{hyphenat}
+
+
 % For your own copies (looks nicer)
 % \documentclass[balanced,twoside,11pt]{ubcdiss}
 
@@ -66,7 +85,8 @@
 
 %% Math or theory people may want to include the handy AMS macros
 %\usepackage{amssymb}
-%\usepackage{amsmath}
+\usepackage{amsmath}
+\usepackage{icomma}
 %\usepackage{amsfonts}
 
 %% The pifont package provides access to the elements in the dingbat font.   

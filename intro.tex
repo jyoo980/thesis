@@ -2,9 +2,9 @@
 %%!TEX root = diss.tex
 
 % TODO: update this as required (until the cutoff date).
-\newcommand{\numparticipants}{55}
+\newcommand{\numparticipants}{69}
 % TODO: please remember to update this before I submit to GPS.
-\newcommand{\toolname}{Tool TBD}
+\newcommand{\toolname}{CodeHover}
 \newcommand{\userstudynum}{75}
 \newcommand{\fasterpct}{64}
 \newcommand{\usefulpct}{70}
@@ -46,7 +46,7 @@ A study by Ko et al. found that developers spent approximately 22\% of their
 time reading code, while a further 16\% was spent on navigating dependencies.
 \cite{ko-2005-eliciting-design}.
 This equates to developers spending approximately 38\% of their time on
-program comprehension tasks, in comparison to spending approximimately 20\% of
+program comprehension tasks, in comparison to spending approximately 20\% of
 their time on editing code \cite{ko-2005-eliciting-design}.
 
 \par The questions that developers may ask themselves as they attempt to 
@@ -102,7 +102,7 @@ code \cite{barnett-2014-get}.
 GetMeHere also enables developers to form reachability questions that are more
 general in scope, mitigating the limitations associated with constraining
 the set of possible reachability questions.
-Unlike the WhyLine, GetMeHere is not built as a standalone tool, but is
+Unlike the Whyline, GetMeHere is not built as a standalone tool, but is
 integrated into existing \ac{IDE}, namely Microsoft Visual Studio.
 Although the performance of GetMeHere on smaller benchmark programs (e.g.,
 650 - $11,000$ LOC) is promising, it has yet to be evaluated on programs that 
@@ -134,10 +134,12 @@ developer may encounter during their day-to-day work.
 Developers were asked to rank each reachability question on the frequency with 
 which they encountered them in their work.
 
+% TODO: check back here to see if we end up building a plugin or an actual
+%       extension of IntelliJ.
 \par The survey results provided an empirically-supported foundation for the
 development of \emph{\toolname{}}, an extension of the IntelliJ IDEA IDE that
 enables developers to answer popular reachability questions on-the-fly.
-I evaluated the performance of \toolname{} by conducting a user study
+We evaluated the performance of \toolname{} by conducting a user study
 with \userstudynum{} professional software developers.
 Using \toolname{}, developers in our study were able to obtain answers to 
 reachability questions approximately \fasterpct{}\% faster than the control 
@@ -160,12 +162,12 @@ available.
 A study of the questions that software developers ask in practice, tools that
 support developer questions, and how developers currently explore and 
 answer questions about their programs is explored in Chapter 
-\ref{ch:RelatedWork}. In Chapter \ref{ch:Survey}, I detail the method, 
+\ref{ch:RelatedWork}. In Chapter \ref{ch:Survey}, we detail the method, 
 results, and threats to validity of the survey used to analyze the type and 
 frequency of reachability questions that professional developers ask in 
-practice. I describe the implementation of \toolname{} in Chapter 4, and discuss
+practice. we describe the implementation of \toolname{} in Chapter 4, and discuss
 the user study and evaluation of the tool in Chapter 5.
-Finally, I conclude with a summary of the work in Chapter 6 and describe future
+Finally, we conclude with a summary of the work in Chapter 6 and describe future
 work and research directions.
 
 % TODO: leave in or leave out, flowery af.
