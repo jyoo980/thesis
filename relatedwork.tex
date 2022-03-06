@@ -292,7 +292,7 @@ trace.
 Like the Whyline, GetMeHere presents a set of analysis options in a context
 menu that appears near the property or element under inspection.
 
-\begin{figure}[ht]
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.75\textwidth]{./figs/getmehere-invoke.png}
 \caption{The invocation mechanism for GetMeHere in Microsoft Visual Studio}
@@ -305,6 +305,7 @@ having to actually run the program under inspection.
 GetMeHere is also presented as a general query engine, where developers can
 specify a slice in a program, and execute queries that represent reachability
 questions over the given slice \cite{barnett-2014-get}.
+
 The flexibility afforded by GetMeHere enables developers to write queries that 
 are highly-parameterizable and specific to the line of investigation they have
 chosen to pursue in localizing a defect or understanding a program.
@@ -327,6 +328,18 @@ GetMeHere displays an execution trace using the Microsoft Debugger Canvas
 \cite{bragdon-2012-canvas}, an industrial implementation of the earlier 
 Code Bubbles \cite{bragdon-2010-code-bubbles} paradigm for Visual Studio
 \cite{barnett-2014-get}.
+Figure \ref{fig:GetMeHereResults} shows how GetMeHere visualizes execution
+traces.
+Each method that is called within a trace is represented by a bubble, green
+highlighting denotes code that was executed, arrows denote the control-flow
+within a trace, and annotations mark the values of fields and variables. 
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{./figs/getmehere-results.png}
+\caption{The visualization interface of a program execution trace in GetMeHere}
+\label{fig:GetMeHereResults}
+\end{figure}
 
 \section{How Developers Use Tools to Understand Programs}
 \label{sec:HowDevelopersUseToolsToUnderstandPrograms}
