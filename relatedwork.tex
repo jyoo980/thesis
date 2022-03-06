@@ -286,9 +286,22 @@ that affect program output.
 \par Similar to the Whyline, GetMeHere enables developers to select a line of 
 code as a point of interest and visualize the execution that reaches the given 
 point.
-Where it differs, however, is in how it is able to generate this execution
-by using an SMT-based static analysis \cite{barnett-2014-get} without having to
-execute the code.
+Figure \ref{fig:GetMeHereInvoke} presents the interface through which a
+developer would invoke GetMeHere in order to find a relevant program execution
+trace.
+Like the Whyline, GetMeHere presents a set of analysis options in a context
+menu that appears near the property or element under inspection.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.75\textwidth]{./figs/getmehere-invoke.png}
+\caption{The invocation mechanism for GetMeHere in Microsoft Visual Studio}
+\label{fig:GetMeHereInvoke}
+\end{figure}
+
+Where GetMeHere differs, however, is in how it is able to generate an execution
+trace by using an \ac{SMT}-based static analysis \cite{barnett-2014-get} without 
+having to actually run the program under inspection.
 GetMeHere is also presented as a general query engine, where developers can
 specify a slice in a program, and execute queries that represent reachability
 questions over the given slice \cite{barnett-2014-get}.
