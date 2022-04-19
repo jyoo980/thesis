@@ -3,32 +3,37 @@
 
 \begin{sidewaystable}[ht]
 \centering
-\caption{Codes to describe survey questions}
-\label{Table:SurveyCoding}
+\caption{Tags to describe survey questions}
+\label{Table:SurveyTags}
   \begin{tabular}{lcl}
     \hline
-    \textbf{Code}                   & \multicolumn{1}{l}{\textbf{Number of Questions}} & \textbf{Description} \\ \hline
-    Find in trace ($Q_{find}$)      & 4                                                & Matches reachability question of the form $find \ SC \ in \ TR$ \\
-    Compare traces ($Q_{compare}$)   & 2                                                & Matches reachability question of the form $compare(TR_a, TR_b)$ \\           
+    \textbf{Tag}                   & \multicolumn{1}{l}{\textbf{Number of Questions}} & \textbf{Description} \\ \hline
+    \rowcolor{Gray}
+    Find in trace ($Q_{find}$)      & 5                                                & Matches reachability question of the form \textit{find SC in TR} \\
+    Compare traces ($Q_{compare}$)   & 3                                                & Matches reachability question of the form \textit{compare($TR_a$, $TR_b$)} \\
+    \rowcolor{Gray}
     Navigate trace ($Q_{navigate}$) & 1                                                & A question related to the comprehension of program traces  \\
-    Invalid ($I$)                   & 2                                                & \begin{tabular}[c]{@{}l@{}}Question for which there was no direct translation to a reachability\\ or trace navigation question\end{tabular} \\ \hline
   \end{tabular}
 
   \bigskip
-  
-  \caption{Codes assigned to each question}
-  \label{Table:QuestionCodes}
+  \caption{Tags assigned to each question}
+  \label{Table:QuestionTags}
   \begin{tabular}{lcl}
     \hline
-    \textbf{Development Question}                   & \multicolumn{1}{l}{\textbf{Code}} & \textbf{Condensed Question Text} \\ \hline
+    \textbf{Development Question}                   & \multicolumn{1}{l}{\textbf{Tag}} & \textbf{Condensed Question Text} \\ \hline
+    \rowcolor{Gray}
     1 & $Q_{find}$ & Where did a value come from, and/or how was it formed? \\
-    2 & $I$ & Did I introduce any unwanted changes in the new version of this code?\\
-    3 & $I$ & How is an instance of this class created/initialized? \\
+    2 & $Q_{compare}$ & Did I introduce any unwanted changes in the new version of this code?\\
+    \rowcolor{Gray}
+    3 & $Q_{find}$ & How is an instance of this class created/initialized? \\
     4 & $Q_{find}$ & Given some data, which parts of it are accessed downstream? \\
+    \rowcolor{Gray}
     5 & $Q_{find}$ & Given some data, which parts of it are modified downstream? \\
     6 & $Q_{compare}$ & Is deleting what appears to be unused code going to break anything? \\
+    \rowcolor{Gray}
     7 & $Q_{compare}$ & \begin{tabular}[c]{@{}l@{}}Given two subtypes and their implementations of a\\ common method, how do they handle data differently?\end{tabular} \\
     8 & $Q_{find}$ & \begin{tabular}[c]{@{}l@{}}Given some parts of a program that are depends on a value,\\ which parts of it are executed or reachable?\end{tabular} \\
+    \rowcolor{Gray}
     9 & $Q_{navigate}$ & What does the control-flow look like between two locations in code? \\ \hline
   \end{tabular}
 \end{sidewaystable}

@@ -27,11 +27,12 @@
     xbar stacked,   % Stacked horizontal bars
     bar width={15.0pt},
     xmin=0,         % Start x axis at 0
+    xmax = 70,
     ytick=data,     % Use as many tick labels as y coordinates
     legend columns=5,
     legend style={at={(axis cs:65,0.2)},anchor=south},
     yticklabels from table={\testdata}{Scenarios}, % Get the labels from the Label column of the \datatable
-    ylabel={Development Scenario},
+    ylabel={Development Question},
     legend style={at={(0.5,-0.1)},anchor=north},
   ]
   \addplot [fill=clr1] table [x={I never ask myself this question}, meta=Scenarios,y expr=\coordindex] {\testdata};
