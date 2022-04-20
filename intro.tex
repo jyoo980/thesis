@@ -4,7 +4,7 @@
 % TODO: update this as required (until the cutoff date).
 \newcommand{\numparticipants}{69}
 % TODO: please remember to update this before I submit to GPS.
-\newcommand{\toolname}{CodeHover}
+\newcommand{\toolname}{ReachHover}
 \newcommand{\userstudynum}{75}
 \newcommand{\fasterpct}{64}
 \newcommand{\usefulpct}{70}
@@ -119,7 +119,6 @@ answering reachability questions; both Whyline and GetMeHere provide incredible
 amounts of information for developers.
 However, it is unclear whether this information is presented in a usable
 manner, and what effects it may have on the problem of information overload.
-% TODO: citation needed.
 
 \par In this thesis, I begin by exploring the reachability questions that
 developers ask in practice by analyzing the results of a survey answered
@@ -134,12 +133,22 @@ developer may encounter during their day-to-day work.
 Developers were asked to rank each reachability question on the frequency with 
 which they encountered them in their work.
 
-% TODO: check back here to see if we end up building a plugin or an actual
-%       extension of IntelliJ.
 \par The survey results provided an empirically-supported foundation for the
-development of \emph{\toolname{}}, an extension of the IntelliJ IDEA IDE that
-enables developers to answer popular reachability questions on-the-fly.
-We evaluated the performance of \toolname{} by conducting a user study
+development of \emph{\toolname{}}, a plugin for the JetBrains IntelliJ Platform 
+that enables developers to answer popular reachability questions on-the-fly.
+To evaluate \toolname{}, we considered two research questions:
+
+\begin{itemize}
+  \item[] \textbf{RQ1:} What is the effect of \toolname{} on a developer's 
+  cognitive load as they analyze a system to answer reachability questions?
+  \item[] \textbf{RQ2:} Does \toolname{} have an effect on the type of 
+  information viewed by a developer as they analyze a system to answer
+  reachability questions?
+\end{itemize}
+
+% TODO: write about results properly
+
+We explored these research questions by conducting a user study of \toolname{}
 with \userstudynum{} professional software developers.
 Using \toolname{}, developers in our study were able to obtain answers to 
 reachability questions approximately \fasterpct{}\% faster than the control 
@@ -154,7 +163,7 @@ available.
   \item Provides empirical evidence in support of the type and frequency of
         reachability questions previously investigated by LaToza \etal{}
         \cite{latoza-2010-reach}.
-  \item Introduces \toolname, an extension of the IntelliJ IDEA IDE that 
+  \item Introduces \toolname, a plugin for the JetBrains IntelliJ Platform that 
         presents an interface that developers may use to effectively answer 
         reachability questions that occur in high frequency.
 \end{itemize}
