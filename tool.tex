@@ -4,17 +4,68 @@
 \chapter{The \toolname{} Plugin}
 \label{ch:Tool}
 
-\begin{epigraph}
-  \emph{
-    Deez nuts
-    } ---~James Yoo
-\end{epigraph}
+% \begin{epigraph}
+%   \emph{
+%     Deez nuts
+%     } ---~James Yoo
+% \end{epigraph}
 
 \noindent \toolname{} is an open-source\footnote{\url{https://github.com/jyoo980/reach-hover}}
 plugin developed on the JetBrains IntelliJ Platform.
-We describe how a developer might use \toolname{} in
-section \ref{sec:UsingReachHover}, detail its architecture and implementation 
-in section \ref{sec:Architecture}, and \dots
+Section \ref{sec:DesignMeth} discusses the design methodology for \toolname{},
+derived from the data presented in Chapter \ref{ch:Survey}.
+In section \ref{sec:UsingReachHover}, we describe how a user might use
+\toolname{} in a software development scenario, with a particular focus on
+its mechanism of invocation and how it visualizes data to a user.
+The implementation of \toolname{} is detailed in section
+\ref{sec:Impl}.
+
+\section{Design Methodology}
+\label{sec:DesignMeth}
+
+\noindent To inform the design of \toolname{}, we analyzed the data from a 
+survey that sought to identify the type and frequency of reachability questions 
+that are asked by software developers in practice.
+
+Figure \ref{fig:SurveyResults} shows that Development Questions 1, 2, 5, and 9
+were the most frequently asked among our respondents.
+Using Table \ref{Table:SurveyTags} to map these questions to their associated
+tags, we found that $Q_{find}$ was the most frequent type of question asked out
+of the top four ranked by our respondents.
+Specifically, these questions were:
+
+\noindent\fbox{
+  \parbox{\textwidth}{
+    \textbf{Development Question 1}
+    \begin{center}
+      \textit{Where did a value come from, and/or how was it formed?}
+    \end{center}
+    \textbf{Development Question 5}
+    \begin{center}
+      \textit{Given some data, which parts of it are modified downstream?}
+    \end{center}
+   }
+}
+
+\vspace{1cm}
+
+We noted that these questions are thematically related. They are instantiations 
+of the \textit{find} category of reachability question, and they can also be
+answered by traversing backward and forward in a data-flow trace, respectively.
+Consequently, we decided to build \toolname{} with a particular focus on
+supporting these two questions for the sake of thematic coherence.
+
+\par Since information provided from a data-flow trace could be used to answer
+the questions we attempt to support with \toolname{}, we investigated existing
+data-flow analysis tools to obtain an understanding of the current landscape
+of analysis tooling.
+The IntelliJ IDEA \ac{IDE} exposes forward and backward data-flow analysis
+capabilities to users.
+Figure \ref{fig:IntelliJDataflow} shows how a user might invoke a backward 
+data-flow analysis, while the result is shown in
+Figure \ref{fig:IntelliJDataflowResult}.
+
+\todo{Talk about the issues with the current tooling.}
 
 \section{Using \toolname{}}
 \label{sec:UsingReachHover}
@@ -29,8 +80,8 @@ in section \ref{sec:Architecture}, and \dots
 
 \todo{Talk about the popup window.}
 
-\section{Design \& Implementation}
-\label{sec:Architecture}
+\section{Implementation}
+\label{sec:Impl}
 
 \toolname{} is implemented in the Kotlin programming language, and consumes
 \acp{API} written in Java that are exposed by the IntelliJ Platform.
