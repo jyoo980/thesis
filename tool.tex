@@ -4,10 +4,14 @@
 \chapter{The \toolname{} Plugin}
 \label{ch:Tool}
 
+% TODO: typeset the following nicely.
 % \begin{epigraph}
-%   \emph{
-%     Deez nuts
-%     } ---~James Yoo
+%   \emph{What information consumes is rather obvious: it 
+%     consumes the attention of its recipients.
+%     Hence a wealth of information creates a poverty of attention, and a need 
+%     to allocate that attention efficiently among the overabundance 
+%     of information sources that might consume it.}
+%      ---~Herbert A. Simon
 % \end{epigraph}
 
 \noindent \toolname{} is an open-source\footnote{\url{https://github.com/jyoo980/reach-hover}}
@@ -34,22 +38,14 @@ tags, we found that $Q_{find}$ was the most frequent type of question asked out
 of the top four ranked by our respondents.
 Specifically, these questions were:
 
-\noindent\fbox{
-  \parbox{\textwidth}{
-    \textbf{Development Question 1}
-    \begin{center}
-      \textit{Where did a value come from, and/or how was it formed?}
-    \end{center}
-    \textbf{Development Question 5}
-    \begin{center}
-      \textit{Given some data, which parts of it are modified downstream?}
-    \end{center}
-   }
-}
+\begin{itemize}
+  \item[] \textbf{Development Question 1}:\\ \textit{Where did a value come from,
+  and/or how was it formed?}
+  \item[] \textbf{Development Question 2}:\\ \textit{Given some data, which
+  parts of it are modified downstream?}
+\end{itemize}
 
-\vspace{1cm}
-
-We noted that these questions are thematically related. They are instantiations 
+\par We noted that these questions are thematically related. They are instantiations 
 of the \textit{find} category of reachability question, and they can also be
 answered by traversing backward and forward in a data-flow trace, respectively.
 Consequently, we decided to build \toolname{} with a particular focus on
@@ -64,8 +60,20 @@ capabilities to users.
 Figure \ref{fig:IntelliJDataflow} shows how a user might invoke a backward 
 data-flow analysis, while the result is shown in
 Figure \ref{fig:IntelliJDataflowResult}.
+We found these pre-existing data-flow capabilities to be a good basis for the 
+development of \toolname{} due to its ease of extension via the JetBrains 
+IntelliJ Platform \ac{SDK}.
 
-\todo{Talk about the issues with the current tooling.}
+\par Next, we began to identify pain points that users might face as they
+invoked the data-flow analysis tool.
+We discovered that discovering the tool itself might be difficult for
+users; the action to invoke the tool was a three-click action.
+Additionally, the action was hidden behind a context menu that did not appear
+to have a strong information scent that guided users to discovering and invoking
+the tool from a very broad list of options (\ie data-flow-specific analyses
+are accessed via a general ``Analyze" menu element).
+
+\todo{Talk about the lack of context in the result vis.}
 
 \section{Using \toolname{}}
 \label{sec:UsingReachHover}
