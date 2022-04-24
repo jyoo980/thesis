@@ -17,10 +17,12 @@
 \noindent \toolname{} is an open-source\footnote{\url{https://github.com/jyoo980/reach-hover}}
 plugin developed on the JetBrains IntelliJ Platform.
 Section \ref{sec:DesignMeth} discusses the design methodology for \toolname{},
-derived from the data presented in Chapter \ref{ch:Survey}.
+derived from the data presented in Chapter \ref{ch:Survey} and an investigation
+of the current tools that provide information that might be used to help answer
+reachability questions.
 In section \ref{sec:UsingReachHover}, we describe how a user might use
 \toolname{} in a software development scenario, with a particular focus on
-its mechanism of invocation and how it visualizes data to a user.
+its mechanism of invocation and how it visualizes data.
 The implementation of \toolname{} is detailed in section
 \ref{sec:Impl}.
 
@@ -48,17 +50,23 @@ Specifically, these questions were:
 \par We noted that these questions are thematically related. They are instantiations 
 of the \textit{find} category of reachability question, and they can also be
 answered by traversing backward and forward in a data-flow trace, respectively.
+For example, to answer Development Question 1, a user could invoke a backward
+data-flow trace, and filter for nodes that have a control or data dependency
+on the value under analysis.
+To answer Development Question 2, a forward data-flow analysis can be invoked,
+and the result can be filtered for control or data dependencies on the value
+under analysis.
 Consequently, we decided to build \toolname{} with a particular focus on
 supporting these two questions for the sake of thematic coherence.
 
 \par Since information provided from a data-flow trace could be used to answer
-the questions we attempt to support with \toolname{}, we investigated existing
-data-flow analysis tools to obtain an understanding of the current landscape
-of analysis tooling.
+the questions we attempt to support with \toolname{}, we began by investigating 
+existing data-flow analysis tools to obtain an understanding of the current 
+landscape of analysis tooling.
 The IntelliJ IDEA \ac{IDE} exposes forward and backward data-flow analysis
 capabilities to users.
 Figure \ref{fig:IntelliJDataflow} shows how a user might invoke a backward 
-data-flow analysis, while the result is shown in
+data-flow analysis, while the result of this analysis is shown in
 Figure \ref{fig:IntelliJDataflowResult}.
 We found these pre-existing data-flow capabilities to be a good basis for the 
 development of \toolname{} due to its ease of extension via the JetBrains 
@@ -66,14 +74,51 @@ IntelliJ Platform \ac{SDK}.
 
 \par Next, we began to identify pain points that users might face as they
 invoked the data-flow analysis tool.
-We discovered that discovering the tool itself might be difficult for
+We observed that discovering the tool itself might be difficult for
 users; the action to invoke the tool was a three-click action.
 Additionally, the action was hidden behind a context menu that did not appear
 to have a strong information scent that guided users to discovering and invoking
 the tool from a very broad list of options (\ie data-flow-specific analyses
 are accessed via a general ``Analyze" menu element).
+In the result presented by the data-flow analysis tool, each element in the 
+data-flow trace is presented as an node in a tree-like structure that is 
+structually similar to a conventional hierarchical tree.
+We found this to be useful for preserving the structural information relevant
+to our target reachability questions (\eg method calls \texttt{a}, and \texttt{b}
+within a method \texttt{c} are displayed as children of the node \texttt{c} in
+the tree).
 
-\todo{Talk about the lack of context in the result vis.}
+\par Although structural information was easily preserved through the tree, each node
+displayed only the single line of code within the data-flow trace, often
+without visual aids such as syntax highlighting.
+This meant that users often analyzed each node in isolation from any surrounding
+context, particularly if they were not aware that double-clicking a node in the
+tree would focus the editor pane to the line of code under inspection.
+However, this might introduce the additional problem of frequent context
+switching and reconstruction as editor focus shifts between files and code
+blocks.
+
+\par Investigating the current tooling available for data-flow analysis, and
+its associated user pain points provided a foundation for the design of 
+\toolname{}.
+We attempted to achieve the following with the design of our tool:
+
+\begin{itemize}
+  \item[] \textbf{Design Goal 1}: \\
+    \textit{
+      User friction should be minimized between the developer and \toolname{},
+      especially with respect to how they might discover and invoke the tool.
+    }
+  \item[] \textbf{Design Goal 2}: \\
+  \textit{
+    \toolname{} should present more context surrounding a data-flow node in
+      a way that minimizes the amount of context switching for a developer.
+  }
+\end{itemize}
+
+We describe the user-facing result of implementing these goals in section
+\ref{sec:UsingReachHover}, while a technical discussion of their implementation 
+is discussed in section \ref{sec:Impl}.
 
 \section{Using \toolname{}}
 \label{sec:UsingReachHover}
