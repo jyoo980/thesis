@@ -131,7 +131,34 @@ is discussed in section \ref{sec:Impl}.
 \subsection{Result Visualization}
 \label{subsection:ResultVisualization}
 
-\todo{Talk about the popup window.}
+\noindent A goal of \toolname{} was to present more context surrounding the 
+result of a data-flow analysis. 
+We also wanted to preserve the structural information that was
+already provided by existing static analysis tools, such as the data-flow
+analysis tooling built into IntelliJ IDEA, or the call hierarchy explorer in
+the Eclipse \ac{IDE}, which presents results using the same hierarchical
+tree paradigm.
+
+\par Preserving the presentation of structural information served two purposes.
+First, we did not aim to completely redesign an interface for viewing data-flow
+information;
+our goal was to enrich an existing interface with additional information, and
+introducing a completely new user interface paradigm might have introduced
+additional complexity in the form of developers having to adapt to a new 
+paradigm before the tool became useful to them.
+Second, we wanted to avoid the issues that \dots
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{./figs/reach-hover-vis.png}
+\caption{
+  A data-flow trace presented by \toolname{}. 
+}
+\label{fig:IntelliJDataflow}
+\end{figure}
+
+
+
 
 \section{Implementation}
 \label{sec:Impl}
