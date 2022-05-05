@@ -123,10 +123,27 @@ is discussed in section \ref{sec:Impl}.
 \section{Using \toolname{}}
 \label{sec:UsingReachHover}
 
+In this section, we describe how a user might interact with \toolname{}, framed
+within the context of a software development task.
+First, we describe how a user might invoke our tool to begin the process
+of answering a reachability question.
+Next, we describe the user interface of the visualization presented by 
+\toolname{}.
+
 \subsection{Invocation Interaction}
 \label{subsection:InvocationInteraction}
 
-\todo{Talk about hovering.}
+TODO: say some shit here...
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{./figs/reach-hover-invoke.png}
+\caption{
+  Blah
+}
+\label{fig:ReachHoverInvoke}
+\end{figure}
+
 
 \subsection{Result Visualization}
 \label{subsection:ResultVisualization}
@@ -142,23 +159,43 @@ tree paradigm.
 \par Preserving the presentation of structural information served two purposes.
 First, we did not aim to completely redesign an interface for viewing data-flow
 information;
-our goal was to enrich an existing interface with additional information, and
-introducing a completely new user interface paradigm might have introduced
+our goal was to enrich an existing interface with additional information.
+Introducing a completely new user interface paradigm might have introduced
 additional complexity in the form of developers having to adapt to a new 
-paradigm before the tool became useful to them.
-Second, we wanted to avoid the issues that \dots
+paradigm before our tool became useful to them.
+Second, we wanted to preserve non-local context, \ie information that is not
+directly observable from code and its surrounding context, such as how deep
+within a call hierarchy a location in code exists.
+
+\par We present the visualization component of \toolname{} in Figure
+\ref{fig:ReachHoverVis}.
+Information regarding a reachability question is presented in two main
+sub-components.
+High-level non-local context is provided in the top half of the main component,
+which is the same component used by the the original data-flow analysis tool
+built into IntelliJ IDEA.
+Fine-grained local context is provided by the preview editor sub-component.
+A developer is able to begin investigating code from a high-level by selecting
+a row in the top component.
+This triggers a change in the preview editor to focus on the line of code under
+inspection, which is highlighted in its location in the editor.
+Additional information, such as the file and project directory in which the
+line of code under inspection is located, is presented in the bottom
+toolbar of the main component.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=\textwidth]{./figs/reach-hover-vis.png}
 \caption{
-  A data-flow trace presented by \toolname{}. 
+  A data-flow trace presented by \toolname{}. (A) enables developers to select
+  between a file, directory, or project-level scope for the reachability
+  analysis. (B) contains the same hierarchical text-tree view as the standard
+  IntelliJ data-flow analysis tool. (C) demonstrates the highlighting of the
+  code under inspection that corresponds to the selected element in (B).
+  The file name and directory are provided by (D) and (E).
 }
-\label{fig:IntelliJDataflow}
+\label{fig:ReachHoverVis}
 \end{figure}
-
-
-
 
 \section{Implementation}
 \label{sec:Impl}
