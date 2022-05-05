@@ -4,15 +4,10 @@
 \chapter{The \toolname{} Plugin}
 \label{ch:Tool}
 
-% TODO: typeset the following nicely.
-% \begin{epigraph}
-%   \emph{What information consumes is rather obvious: it 
-%     consumes the attention of its recipients.
-%     Hence a wealth of information creates a poverty of attention, and a need 
-%     to allocate that attention efficiently among the overabundance 
-%     of information sources that might consume it.}
-%      ---~Herbert A. Simon
-% \end{epigraph}
+\begin{epigraph}
+  \emph{It's a plugin, James. How hard could it be?}\\
+     ---~James Yoo
+\end{epigraph}
 
 \noindent \toolname{} is an open-source\footnote{\url{https://github.com/jyoo980/reach-hover}}
 plugin developed on the JetBrains IntelliJ Platform.
@@ -82,7 +77,7 @@ the tool from a very broad list of options (\ie data-flow-specific analyses
 are accessed via a general ``Analyze" menu element).
 In the result presented by the data-flow analysis tool, each element in the 
 data-flow trace is presented as an node in a tree-like structure that is 
-structually similar to a conventional hierarchical tree.
+structurally similar to a conventional hierarchical tree.
 We found this to be useful for preserving the structural information relevant
 to our target reachability questions (\eg method calls \texttt{a}, and \texttt{b}
 within a method \texttt{c} are displayed as children of the node \texttt{c} in
@@ -133,17 +128,63 @@ Next, we describe the user interface of the visualization presented by
 \subsection{Invocation Interaction}
 \label{subsection:InvocationInteraction}
 
-TODO: say some shit here...
+\noindent A task where a developer might want to use \toolname{} might be when 
+they are investigating how a value was created, or where it originated in a 
+data-flow trace. 
+Work in information search and retrieval systems
+\cite{huang-2012-mouse,guo-2010-hover} has shown empirical evidence that cursor
+hovering might be a useful proxy for determining a user's focus or interest in
+a user interface component.
+We use this empirical evidence to inform our design of an invocation mechanism 
+for \toolname{} that is based on cursor attention and hovering.
+
+\par The initial invocation mechanism for \toolname{} is shown in Figure 
+\ref{fig:ReachHoverInvokeBackward}.
+In this figure, we assume a task where a developer is investigating the origin
+of the value \texttt{editorKit}, which is an instantiation of 
+Development Question 1.
+The hover popup is shown containing two options; the first is to invoke
+\toolname{} to begin a reachability analysis, and the second is to show the
+documentation that is usually presented by IntelliJ IDEA when a user hovers
+over a value.
+This hover popup appears only only when a user hovers over a value after a 
+certain delay that is commensurate with other user interface component delays 
+in IntelliJ IDEA.
+We do not consider our interaction mechanism to be more intrusive than the
+default data-flow analysis feature of the \ac{IDE};
+a user would have had to right-click to select the value of interest and
+navigate a context menu to invoke the analysis (Figure
+\ref{fig:IntelliJDataflow}).
+Furthermore, we attempted to address Design Goal 1 by presenting the ability to 
+invoke \toolname{} directly on hover, rather than hidden under a number of 
+context menus where user discoverability and friction might have increased.
+It is also possible for the user to not use \toolname{} altogether, the default
+context menus provided by IntelliJ IDEA are still available.
+Another task where a developer might use \toolname{} is in exploring how a value
+is modified or changed; Figure \ref{fig:ReachHoverInvokeForward} shows how
+the hover popup appears in this case.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=\textwidth]{./figs/reach-hover-invoke.png}
 \caption{
-  Blah
+  The \toolname{} popup (A) that appears when a user hovers over a code
+  structure of interest. In this case, \toolname{} poses the question:
+  ``How was \texttt{editorKit} created?"
 }
-\label{fig:ReachHoverInvoke}
+\label{fig:ReachHoverInvokeBackward}
 \end{figure}
 
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{./figs/reach-hover-invoke-forward.png}
+\caption{
+  The \toolname{} popup (A) that appears when a user hovers over a code
+  structure of interest. In this case, \toolname{} poses the question:
+  ``How was \texttt{dataContext} modified?"
+}
+\label{fig:ReachHoverInvokeForward}
+\end{figure}
 
 \subsection{Result Visualization}
 \label{subsection:ResultVisualization}
@@ -203,7 +244,7 @@ toolbar of the main component.
 \toolname{} is implemented in the Kotlin programming language, and consumes
 \acp{API} written in Java that are exposed by the IntelliJ Platform.
 The mechanism that reports the viability of the analysis that \toolname{}
-exploits to produce a dataflow trace for reachability analysis is 
+exploits to produce a data-flow trace for reachability analysis is 
 language-agnostic.
 As a result, \toolname{} does not depend on any language-specific syntax to 
 determine whether a reachability analysis is viable; it analyzes a genericized 
