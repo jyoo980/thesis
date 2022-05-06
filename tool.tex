@@ -5,19 +5,19 @@
 \label{ch:Tool}
 
 \begin{epigraph}
-  \emph{It's a plugin, Gail. How hard could it be?}\\
-     ---~James Yoo
+  \emph{Mitochondria is the powerhouse of the cell}\\
+     ---~Anonymous
 \end{epigraph}
 
 \noindent \toolname{} is an open-source\footnote{\url{https://github.com/jyoo980/reach-hover}}
 plugin developed on the JetBrains IntelliJ Platform.
 Section \ref{sec:DesignMeth} discusses the design methodology for \toolname{},
 derived from the data presented in Chapter \ref{ch:Survey} and an investigation
-of the current tools that provide information that might be used to help answer
+of current tools that provide information that might be used to help answer
 reachability questions.
 In section \ref{sec:UsingReachHover}, we describe how a user might use
 \toolname{} in a software development scenario, with a particular focus on
-its mechanism of invocation and how it visualizes data.
+its mechanism of invocation and how it visually presents data.
 The implementation of \toolname{} is detailed in section
 \ref{sec:Impl}.
 
@@ -43,14 +43,13 @@ Specifically, these questions were:
 \end{itemize}
 
 \par We noted that these questions are thematically related. They are instantiations 
-of the \textit{find} category of reachability question, and they can also be
+of the \textit{find} category of reachability questions, and they can also be
 answered by traversing backward and forward in a data-flow trace, respectively.
 For example, to answer Development Question 1, a user could invoke a backward
 data-flow trace, and filter for nodes that have a control or data dependency
 on the value under analysis.
-To answer Development Question 2, a forward data-flow analysis can be invoked,
-and the result can be filtered for control or data dependencies on the value
-under analysis.
+The same analysis could be performed on a forward data-flow trace to answer
+Development Question 2.
 Consequently, we decided to build \toolname{} with a particular focus on
 supporting these two questions for the sake of thematic coherence.
 
@@ -79,7 +78,7 @@ In the result presented by the data-flow analysis tool, each element in the
 data-flow trace is presented as an node in a tree-like structure that is 
 structurally similar to a conventional hierarchical tree.
 We found this to be useful for preserving the structural information relevant
-to our target reachability questions (\eg method calls \texttt{a}, and \texttt{b}
+to our target reachability questions (\eg method calls \texttt{a} and \texttt{b}
 within a method \texttt{c} are displayed as children of the node \texttt{c} in
 the tree).
 
@@ -132,7 +131,7 @@ Next, we describe the user interface of the visualization presented by
 they are investigating how a value was created, or where it originated in a 
 data-flow trace. 
 Work in information search and retrieval systems
-\cite{huang-2012-mouse,guo-2010-hover} has shown empirical evidence that cursor
+\cite{huang-2012-mouse,guo-2010-hover} has provided empirical evidence that cursor
 hovering might be a useful proxy for determining a user's focus or interest in
 a user interface component.
 We use this empirical evidence to inform our design of an invocation mechanism 
@@ -192,7 +191,7 @@ the hover popup appears in this case.
 \subsection{Result Visualization}
 \label{subsection:ResultVisualization}
 
-\noindent A goal of \toolname{} was to present more context surrounding the 
+\noindent A goal of \toolname{} is to present more context surrounding the 
 result of a data-flow analysis. 
 We also wanted to preserve the structural information that was
 already provided by existing static analysis tools, such as the data-flow
@@ -226,6 +225,12 @@ inspection, which is highlighted in its location in the editor.
 Additional information, such as the file and project directory in which the
 line of code under inspection is located, is presented in the bottom
 toolbar of the main component.
+Additionally, a user is able to select the scope of a reachability analysis
+(\ie file, directory, and project-level) on-the-fly and without resorting to 
+restarting the entire analysis from scratch, avoiding the need for expensive
+context switching or reconstruction.
+To the best of our knowledge, this is not a feature that is currently available
+in the standard IntelliJ IDEA \ac{IDE}.
 
 \begin{figure}[ht]
 \centering
@@ -267,9 +272,10 @@ is available for the code under inspection.
 If a slicer is available, we convert the raw code element into a \ac{UAST} node.
 
 \par The \ac{UAST} data type enables us to handle program elements in a
-generalized manner.
+generalized manner. 
 Consequently, the logic that determines whether an element is viable for
 reachability analysis does not change across different programming languages.
+The \ac{UAST} data type has support for programs written in Java or Kotlin.
 We have extended the \ac{UAST} data type with two methods that enable us to
 determine whether a given code element is a non-literal method argument, or
 a local variable reference.
@@ -279,7 +285,8 @@ These specific code elements are candidates for the questions
 
 \par Using these methods, the \texttt{EditorHoverListener} dispatches a call to
 the backend of \toolname{} to conduct either a forward or backward reachability
-analysis.
+analysis by sending it a context object that contains the element under 
+inspection, its location in the editor, and other metadata.
 
 \begin{figure}[ht]
 \centering
@@ -290,9 +297,73 @@ analysis.
 \label{fig:ReachHoverFrontend}
 \end{figure}
 
-\subsection{Backend: Reachability Information in Context}
+\subsection{Backend: Computing Reachability Information}
 \label{subsec:Backend}
 
+The backend of \toolname{} was designed with the goal of re-using as much of
+the existing data-flow analysis tooling available in the IntelliJ IDEA
+\ac{IDE}.
+The reasons for this were twofold.
+First, we wanted to save valuable development time by avoiding 
+the re-implementation of components and tooling that we could re-use for our
+needs.
+Second, by deeply integrating our tool with the common frameworks and 
+\acp{API} exposed by the IntelliJ IDEA Platform, we hoped to maintain 
+compatibility with a wider range of tools that are built on the same platform.
+
+\par The \texttt{ReachabilityInfoPopupManager} class serves as the main entry
+point from the frontend of \toolname{}.
+This class receives a context object from the frontend \texttt{EditorHoverListener}
+that contains information such as the element under inspection and the direction of the 
+reachability analysis to be performed from the frontend \texttt{EditorHoverListener}.
+The popup manager first checks whether the element from the context object
+differs from the element it has cached from when it was last called.
+If a new element is detected, the entire context object is passed down to a class
+(\texttt{ReachabilityPopupBuilder})
+that is responsible for continuing the analysis and creating the reachability
+popups presented in Figures \ref{fig:ReachHoverInvokeBackward} and
+\ref{fig:ReachHoverInvokeForward}.
+
+\par \texttt{ReachabilityPopupBuilder} consumes the context object and creates
+the two components of the hover popup: the reachability analysis button and the
+button which a user may click to show the type information and documentation
+related to the element under inspection.
+The two reachability questions supported by \toolname{} are represented by two
+subtypes: \texttt{BackwardReachabilityButton} and 
+\texttt{ForwardReachabilityButton} of the \texttt{ReachabilityButton} supertype.
+The implementations of these subtypes are largely identical, with a key 
+difference in the type of data-flow slice they request from the
+\texttt{SliceDispatchService} object, which contains the program slicing
+facilities exposed by the IntelliJ IDEA \ac{SDK}.
+As the name might suggest, the \texttt{BackwardReachabilityButton} requests a
+\textit{backward} program slice, while the 
+\texttt{ForwardReachabilityButton} request a \textit{forward} program slice.
+Both these buttons execute the \texttt{ShowReachabilityElementsAction} on their
+event handler that registers mouse clicks.
+
+\par When a reachability button is clicked by a user, the 
+\texttt{ShowReachabilityElementsAction} is invoked, which consumes the program
+slices that were previously computed by the button.
+The action instantiates the \texttt{ReachabilityPanel}
+(Figure \ref{fig:ReachHoverVis}), and begins decorating it with the program
+slice information and metadata.
+The hierarchical tree representation of the program slice is generated by the
+\texttt{SliceTreeBuilder} class, which traverses the program slice and assigns
+each element in the slice a corresponding data-flow node that appears in the
+tree.
+
+\begin{landscape}
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.35]{./figs/reach-hover-backend.png}
+\caption{
+  A simplified architectural diagram of the \toolname{} backend.
+}
+\label{fig:ReachHoverBackend}
+\end{figure}
+\end{landscape}
+
+Blah blah
 
 
 \endinput
