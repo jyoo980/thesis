@@ -5,7 +5,7 @@
 \label{ch:Tool}
 
 \begin{epigraph}
-  \emph{It's a plugin, James. How hard could it be?}\\
+  \emph{It's a plugin, Gail. How hard could it be?}\\
      ---~James Yoo
 \end{epigraph}
 
@@ -150,6 +150,9 @@ over a value.
 This hover popup appears only only when a user hovers over a value after a 
 certain delay that is commensurate with other user interface component delays 
 in IntelliJ IDEA.
+Due to the difficulty in overriding the default documentation popup that is
+present in the \ac{IDE}, the reachability popup can sometimes appear in concert
+with a documentation popup for a value.
 We do not consider our interaction mechanism to be more intrusive than the
 default data-flow analysis feature of the \ac{IDE};
 a user would have had to right-click to select the value of interest and
@@ -242,12 +245,54 @@ toolbar of the main component.
 \label{sec:Impl}
 
 \toolname{} is implemented in the Kotlin programming language, and consumes
-\acp{API} written in Java that are exposed by the IntelliJ Platform.
-The mechanism that reports the viability of the analysis that \toolname{}
-exploits to produce a data-flow trace for reachability analysis is 
-language-agnostic.
-As a result, \toolname{} does not depend on any language-specific syntax to 
-determine whether a reachability analysis is viable; it analyzes a genericized 
-program syntax tree that is provided by \class{UAST} \dots
+\acp{API} implemented in Java that are exposed by the IntelliJ Platform.
+The implementation of \toolname{} can be separated into two main components:
+a frontend and a backend.
+The frontend detects cursor hover events and analyzes code for
+reachability analysis viability, while the backend exploits existing data-flow
+analysis features to visualize data for reachability analysis.
+
+\subsection{Frontend: Detecting Values for Reachability Analysis}
+\label{subsec:Frontend}
+
+The \toolname{} frontend (Figure \ref{fig:ReachHoverFrontend}) is designed as 
+a loosely-coupled component that aims to be largely orthogonal to a specific 
+programming language or project structure.
+We implement an existing event listener interface that is exposed by the
+IntelliJ IDEA \ac{SDK} for public use in order to create a class that listens
+for hover events in the editor (\texttt{EditorHoverListener}).
+Whenever a code element is detected under a hover event, we call a utility 
+class (\texttt{SliceDispatchService}) to determine whether a program slicer
+is available for the code under inspection.
+If a slicer is available, we convert the raw code element into a \ac{UAST} node.
+
+\par The \ac{UAST} data type enables us to handle program elements in a
+generalized manner.
+Consequently, the logic that determines whether an element is viable for
+reachability analysis does not change across different programming languages.
+We have extended the \ac{UAST} data type with two methods that enable us to
+determine whether a given code element is a non-literal method argument, or
+a local variable reference.
+These specific code elements are candidates for the questions 
+``Where did a value come from, and/or how was it formed?" or 
+``Given some data, which parts of it are modified downstream?" respectively.
+
+\par Using these methods, the \texttt{EditorHoverListener} dispatches a call to
+the backend of \toolname{} to conduct either a forward or backward reachability
+analysis.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{./figs/reach-hover-frontend.png}
+\caption{
+  A simplified architectural diagram of the \toolname{} frontend.
+}
+\label{fig:ReachHoverFrontend}
+\end{figure}
+
+\subsection{Backend: Reachability Information in Context}
+\label{subsec:Backend}
+
+
 
 \endinput
