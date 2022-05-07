@@ -17,5 +17,6 @@
 *.dblite
 *.pdf
 *~
+*.swp
 **.bak
 diss.pdf

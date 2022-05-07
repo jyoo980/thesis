@@ -34,6 +34,8 @@
 
 \newcommand{\gm}[1]{\textcolor{orange}{{\textit{GM: #1}}}}
 \newcommand{\jy}[1]{\textcolor{green}{{\textit{GV: #1}}}}
+\newcommand{\toolname}{ReachHover}
+
 
 % For submission to GPS
 \documentclass[gpscopy,onehalfspacing,11pt]{ubcdiss}
@@ -59,6 +61,7 @@
 % Break up hyphenated stuff neatly.
 \usepackage[htt]{hyphenat}
 
+\usepackage{pdflscape}
 
 % For your own copies (looks nicer)
 % \documentclass[balanced,twoside,11pt]{ubcdiss}
@@ -80,8 +83,10 @@
 %%
 
 %% NFSS font specification (New Font Selection Scheme)
-\usepackage{times,mathptmx,courier}
-\usepackage[scaled=.92]{helvet}
+%% \usepackage{times,mathptmx,courier}
+%% \usepackage[scaled=.92]{helvet}
+
+\usepackage{mlmodern}
 
 %% Math or theory people may want to include the handy AMS macros
 %\usepackage{amssymb}
@@ -461,10 +466,17 @@
 % Generally recommended to put each chapter into a separate file
 \include{relatedwork}
 \include{survey}
+<<<<<<< HEAD
 \include{tool}
 \include{user-study}
 %\include{model}
 %\include{impl}
+=======
+
+% Tool Implementation
+\include{tool}
+
+>>>>>>> main
 %\include{discussion}
 %\include{conclusions}
 
