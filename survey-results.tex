@@ -3,15 +3,15 @@
 
 \pgfplotstableread{
   Scenarios {I never ask myself this question} 2 Neutral 4 {I often ask myself this question}
-  9  3	7	13	14	30
-  8  3	9	23	13	19
-  7  3	18	11	15	20
-  6  11	11	12	13	20
-  5  3	8	10	28	18
-  4  4	15	17	23	8
-  3  9	19	12	19	8
-  2  1	9	7	19	31
-  1  2	8	4	29	24
+  9  3	8	13	16	32
+  8  3	13	24 13	19
+  7  5	18	11	16	22
+  6  12	11	13 15	21
+  5  4	10	11 28	19
+  4  5	17	18	23	9
+  3  9	22 13	19	9
+  2  1	9	8	20	34
+  1  2	8	4	33	25
 }
 \testdata
 
@@ -27,7 +27,7 @@
     xbar stacked,   % Stacked horizontal bars
     bar width={15.0pt},
     xmin=0,         % Start x axis at 0
-    xmax = 70,
+    xmax = 75,
     ytick=data,     % Use as many tick labels as y coordinates
     legend columns=5,
     legend style={at={(axis cs:65,0.2)},anchor=south},
