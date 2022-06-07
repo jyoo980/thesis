@@ -18,14 +18,16 @@ Second, we ask whether the same enrichment of data-flow and reachability
 information has an effect on the completeness of program comprehension tasks
 performed by developers.
 To investigate these questions, we conducted a user study where participants 
-were asked to complete two program comprehension tasks with and without the 
-ability to use \toolname{}.
-We discuss the tasks in Section \ref{sec:Tasks} and describe the experimental
-design of the study and the recruitment of our subjects in Section
+were asked to complete two program comprehension tasks in the source code of 
+the Apache NetBeans\footnote{\url{https://netbeans.apache.org}} \ac{IDE} with 
+and without the ability to use \toolname{}.
+\par We discuss the tasks in Section \ref{sec:Tasks} and describe the 
+experimental design of the study and the recruitment of our subjects in Section
 \ref{sec:ExperimentalDesign}, and Section \ref{sec:UserStudyRecruitment}, 
 respectively.
 Finally, we conclude with a discussion of our results in Section
 \ref{sec:UserStudyResults}.
+
 
 \section{Tasks}
 \label{sec:Tasks}
@@ -39,6 +41,18 @@ to manually traverse the data-flow result provided by IntelliJ IDEA and
 \toolname{} and identify relevant values.
 These are examples of reachability questions of the form \findq{}, where
 $SC$ is some search criteria and $TR$ is a set of traces.
+
+\par We selected the Apache NetBeans \ac{IDE} in the design of our study after 
+taking into account its complexity and our subjects' perceived familiarity with
+\acp{IDE}.
+First, we wanted to evaluate \toolname{} and investigate our research questions
+in a system that would be somewhat comparable to the real-world code bases
+encountered by professional software developers.
+The relative size and complexity of the NetBeans project (7.4MM SLOC, 38K Java
+files), and its popularity as an open-source software project \dots
+% TODO: say something about why this meets our needs...
+% Also say something about how it's useful to have a project that developers
+% are at least mentally familiar with (they probably know what an IDE is).
 
 \subsection{Task 1}
 \label{subsec:TaskOne}
@@ -55,9 +69,8 @@ This design was adopted in an attempt to minimize transfer learning across
 tasks, and to help mitigate any causal relationships between specific tasks
 and our tool. 
 
-
 \section{Participant Recruitment}
-\label{sec:Recruitment}
+\label{sec:UserStudyRecruitment}
 
 We sought out subjects who ideally had experience working as professional
 software developers.
@@ -74,3 +87,12 @@ one out of five gift cards to an e-commerce site valued at \$\cardamount{} each.
 \label{subsec:UserStudyDemographics}
 
 \endinput
+
+
+TODOs
+
+1. Have I used SLOC (source lines of code) before? Do I need to define a new
+   acronym?
+2. Is the counting software I use (cloc) okay?
+3. Is # files + SLOC a decent proxy for complexity?
+
