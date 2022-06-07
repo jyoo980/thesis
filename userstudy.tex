@@ -22,12 +22,23 @@ were asked to complete two program comprehension tasks with and without the
 ability to use \toolname{}.
 We discuss the tasks in Section \ref{sec:Tasks} and describe the experimental
 design of the study and the recruitment of our subjects in Section
-\ref{sec:ExperimentalDesign}, and Section \ref{sec:Recruitment}, respectively.
+\ref{sec:ExperimentalDesign}, and Section \ref{sec:UserStudyRecruitment}, 
+respectively.
 Finally, we conclude with a discussion of our results in Section
-\ref{sec:Results}.
+\ref{sec:UserStudyResults}.
 
 \section{Tasks}
 \label{sec:Tasks}
+
+Each task in our study is based on a high-level reachability question. 
+Task 1 is an instantiation of the question type: ``How was \texttt{x} created?"
+where \texttt{x} is a method parameter, and Task 2 conforms to the question
+type: ``How is \texttt{y} modified?" where \texttt{y} is a local variable.
+Within each task, we also ask a number of questions that require our subjects
+to manually traverse the data-flow result provided by IntelliJ IDEA and
+\toolname{} and identify relevant values.
+These are examples of reachability questions of the form \findq{}, where
+$SC$ is some search criteria and $TR$ is a set of traces.
 
 \subsection{Task 1}
 \label{subsec:TaskOne}
@@ -37,6 +48,13 @@ Finally, we conclude with a discussion of our results in Section
 
 \section{Experimental Design}
 \label{sec:ExperimentalDesign}
+
+We employed four treatments within our study, varying the order in which tasks
+were presented to our subjects and the ability to use \toolname{}.
+This design was adopted in an attempt to minimize transfer learning across
+tasks, and to help mitigate any causal relationships between specific tasks
+and our tool. 
+
 
 \section{Participant Recruitment}
 \label{sec:Recruitment}
@@ -50,9 +68,9 @@ Each subject was provided compensation in the form of a raffle entry to win
 one out of five gift cards to an e-commerce site valued at \$\cardamount{} each.
 
 \section{Results}
-\label{sec:Results}
+\label{sec:UserStudyResults}
 
 \subsection{Participant Demographics}
-\label{subsec:Demographics}
+\label{subsec:UserStudyDemographics}
 
 \endinput
